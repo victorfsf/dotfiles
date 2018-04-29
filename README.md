@@ -1,11 +1,11 @@
 # VictorFSF's dotfiles
 
-Made with [ansible](https://www.ansible.com/) for `Ubuntu 18.04 LTS`.
+Made with [ansible](https://www.ansible.com/) for [`Ubuntu 18.04 LTS`](http://releases.ubuntu.com/18.04/).
 Must be used locally.
 
 ## Deploy
 
-Create the following files from their templates:
+Create the following files:
 
 ```bash
 inventory  # from inventory.example
