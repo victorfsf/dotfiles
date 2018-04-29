@@ -13,9 +13,11 @@
     - system
     - numix
     - git
+    - termite
     - zsh
     - pyenv
     - nvm
+    - zenv
     - vscode
   environment:
     FILES_PATH: '{{ playbook_dir }}/files'

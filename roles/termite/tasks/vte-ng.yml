@@ -1,0 +1,14 @@
+
+- name: Clone vte-ng's repository
+  git:
+    repo: https://github.com/thestinger/vte-ng.git
+    dest: /tmp/vte-ng
+
+- name: Install vte-ng
+  command: chdir=/tmp/vte-ng {{ item }}
+  loop:
+    - ./autogen.sh
+    - make
+    - make install
+  environment:
+    LIBRARY_PATH: "/usr/include/gtk-3.0:{{ lookup('env', 'LIBRARY_PATH') }}"

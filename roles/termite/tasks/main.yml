@@ -1,0 +1,19 @@
+
+- name: Check if Termite is installed
+  command: termite --version
+  register: termite_installed
+  ignore_errors: yes
+
+- name: Create ~/.config/termite folder
+  file:
+    path: '{{ ansible_env.HOME }}/.config/termite'
+    state: directory
+
+- name: Copy Termite's config file
+  copy:
+    src: 'config.ini'
+    dest: '{{ ansible_env.HOME }}/.config/termite/config'
+    owner: '{{ ansible_user_id }}'
+
+- import_tasks: install.yml
+  when: termite_installed.rc == 127

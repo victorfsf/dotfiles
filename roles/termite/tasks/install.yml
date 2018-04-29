@@ -1,0 +1,51 @@
+
+- name: Install Termite's dependencies
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - g++
+    - libgtk-3-dev
+    - gtk-doc-tools
+    - gnutls-bin
+    - valac
+    - intltool
+    - libpcre2-dev
+    - libglib3.0-cil-dev
+    - libgnutls28-dev
+    - libgirepository1.0-dev
+    - libxml2-utils
+    - gperf
+
+- import_tasks: vte-ng.yml
+
+- name: Clone Termite's repository
+  git:
+    repo: https://github.com/thestinger/termite.git
+    recursive: yes
+    dest: /tmp/termite
+
+- name: Install Termite
+  command: chdir=/tmp/termite {{ item }}
+  loop:
+    - make
+    - make install
+    - ldconfig
+
+- name: Create /lib/terminfo/x directory
+  file:
+    path: /lib/terminfo/x
+    state: directory
+
+- name: Link xterm-termite to /lib/terminfo/x
+  file:
+    src: /usr/local/share/terminfo/x/xterm-termite
+    dest: /lib/terminfo/x/xterm-termite
+    state: link
+
+- name: Update alternatives
+  alternatives:
+    link: /usr/bin/x-terminal-emulator
+    name: x-terminal-emulator
+    path: /usr/local/bin/termite
+    priority: 60
