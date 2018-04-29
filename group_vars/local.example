@@ -17,5 +17,7 @@ python3_version:
 python2_version:
 
 # nvm
-
 node_version:  # if empty, it'll install the latest LTS version
+
+# tmux
+tmux_version: 2.7  # Most recent version (as of 29 April, 2018)

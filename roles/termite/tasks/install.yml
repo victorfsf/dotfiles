@@ -43,9 +43,16 @@
     dest: /lib/terminfo/x/xterm-termite
     state: link
 
+- name: Copy termite-tmux script
+  copy:
+    src: 'termite-tmux'
+    dest: '/usr/local/bin/termite-tmux'
+    owner: '{{ ansible_user_id }}'
+    mode: u+x
+
 - name: Update alternatives
   alternatives:
     link: /usr/bin/x-terminal-emulator
     name: x-terminal-emulator
-    path: /usr/local/bin/termite
+    path: /usr/local/bin/termite-tmux
     priority: 60

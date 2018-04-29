@@ -1,0 +1,19 @@
+
+- name: Check tmux version
+  shell: tmux -V | sed 's/tmux //'
+  register: tmux_installed_version
+  ignore_errors: true
+
+- import_tasks: install.yml
+  when: "tmux_version is version_compare(tmux_installed_version.stdout, '!=')"
+
+- name: Copy .tmux.conf
+  copy:
+    src: .tmux.conf
+    dest: '{{ ansible_env.HOME }}/.tmux.conf'
+    owner: '{{ ansible_user_id }}'
+
+- name: Restart tmux
+  command: tmux kill-server
+  ignore_errors: true
+  when: tmux_installed_version.rc == 0

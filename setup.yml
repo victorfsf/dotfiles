@@ -13,6 +13,7 @@
     - system
     - numix
     - git
+    - tmux
     - termite
     - zsh
     - pyenv

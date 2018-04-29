@@ -1,0 +1,21 @@
+
+- name: Download tmux from source
+  unarchive:
+    src: https://github.com/tmux/tmux/releases/download/{{ tmux_version }}/tmux-{{ tmux_version }}.tar.gz
+    dest: /tmp/
+    remote_src: yes
+
+- name: Install tmux dependencies
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - libevent-dev
+    - libncurses-dev
+
+- name: Install tmux
+  command: chdir=/tmp/tmux-{{ tmux_version }} {{ item }}
+  loop:
+    - ./configure
+    - make
+    - make install
