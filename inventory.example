@@ -3,4 +3,4 @@ localhost
 
 [local:vars]
 ansible_connection=local
-ansible_sudo_pass=sudopass
+ansible_sudo_pass=sudopass  # Set your sudo password here
