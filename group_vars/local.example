@@ -1,0 +1,21 @@
+# .gitconfig vars
+
+email:
+
+full_name:
+
+# API token with gist read/write permissions
+github_api_token:
+
+# Gist ID with vscode's settings
+vscode_gist_id:
+
+
+# pyenv
+
+python3_version:
+python2_version:
+
+# nvm
+
+node_version:  # if empty, it'll install the latest LTS version

@@ -1,0 +1,8 @@
+[
+    'termite.desktop',
+    'code.desktop',
+    'google-chrome.desktop',
+    'yandex-browser-beta.desktop',
+    'org.gnome.Nautilus.desktop',
+    'spotify.desktop'
+]

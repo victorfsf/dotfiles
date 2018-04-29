@@ -1,0 +1,27 @@
+
+- name: Update and upgrade installed packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+    force_apt_get: true
+
+- name: Move button layout to left
+  gsettings:
+    key: org.gnome.desktop.wm.preferences.button-layout
+    value: "'close,maximize,minimize:'"
+    state: present
+    user: '{{ ansible_user_id }}'
+
+- name: Configure launcher favorites
+  gsettings:
+    key: org.gnome.shell.favorite-apps
+    value: "{{ lookup('file', 'favorite-apps.txt') }}"
+    state: present
+    user: '{{ ansible_user_id }}'
+
+- name: Configure Dash-To-Dock (dock-fixed)
+  gsettings:
+    key: org.gnome.shell.extensions.dash-to-dock.dock-fixed
+    value: "false"
+    state: present
+    user: '{{ ansible_user_id }}'

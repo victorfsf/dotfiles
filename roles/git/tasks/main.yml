@@ -1,0 +1,11 @@
+
+- name: Install git
+  apt:
+    name: git
+    state: latest
+
+- name: Copy .gitconfig
+  template:
+    src: 'gitconfig.j2'
+    dest: '{{ ansible_env.HOME }}/.gitconfig'
+    owner: '{{ ansible_user_id }}'
