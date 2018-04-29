@@ -1,15 +1,17 @@
 
-- apt_repository:
+- name: Add Numix's ppa
+  apt_repository:
     repo: 'ppa:numix/ppa'
     codename: bionic
 
-- name: Install Numix Icon Theme
+- name: Install Numix Theme
   apt:
     name: '{{ item }}'
     state: latest
   loop:
     - numix-icon-theme
     - numix-icon-theme-circle
+    - numix-gtk-theme
 
 - name: Set Numix Icon Theme as default
   gsettings:

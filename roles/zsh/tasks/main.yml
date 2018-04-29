@@ -1,0 +1,12 @@
+
+- name: Check if zsh is installed
+  command: zsh --version
+  register: zsh_installed
+  ignore_errors: true
+
+- import_tasks: install.yml
+  when: zsh_installed.rc == 1
+
+- import_tasks: extensions/oh-my-zsh.yml
+- import_tasks: extensions/guri.yml
+- import_tasks: extensions/zsh-syntax-highlighting.yml

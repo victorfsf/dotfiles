@@ -1,0 +1,1 @@
+zsh_custom: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"

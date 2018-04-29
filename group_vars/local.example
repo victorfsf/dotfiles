@@ -1,3 +1,7 @@
+# sudo password
+
+ansible_sudo_pass:
+
 # .gitconfig vars
 
 email:
@@ -20,4 +24,7 @@ python2_version:
 node_version:  # if empty, it'll install the latest LTS version
 
 # tmux
-tmux_version: 2.7  # Most recent version (as of 29 April, 2018)
+tmux_version: 2.7
+
+# zsh
+zsh_version: 5.5

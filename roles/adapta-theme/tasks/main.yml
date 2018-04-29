@@ -1,0 +1,35 @@
+
+- name: Install Gnome Shell Extensions & Tweak Tool
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - gnome-tweak-tool
+    - gnome-shell-extensions
+
+- name: Enable User Shell Themes
+  gsettings:
+    key: org.gnome.shell.enabled-extensions
+    value: "['user-theme@gnome-shell-extensions.gcampax.github.com']"
+    state: present
+    user: '{{ ansible_user_id }}'
+
+- name: Add Adapta's ppa
+  apt_repository:
+    repo: 'ppa:tista/adapta'
+    codename: bionic
+
+- name: Install Adapta Theme
+  apt:
+    name: adapta-gtk-theme
+    state: latest
+
+- name: Set Adapta Theme as default
+  gsettings:
+    key: '{{ item }}'
+    value: "'Adapta-Eta'"
+    state: present
+    user: '{{ ansible_user_id }}'
+  loop:
+    - org.gnome.desktop.interface.gtk-theme
+    - org.gnome.shell.extensions.user-theme.name

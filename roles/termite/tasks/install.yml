@@ -45,10 +45,16 @@
 
 - name: Copy termite-tmux script
   copy:
-    src: 'termite-tmux'
-    dest: '/usr/local/bin/termite-tmux'
+    src: termite-tmux
+    dest: /usr/local/bin/termite-tmux
     owner: '{{ ansible_user_id }}'
     mode: u+x
+
+- name: Copy termite.desktop
+  copy:
+    src: termite.desktop
+    dest: '{{ ansible_env.HOME }}/.local/share/applications/termite.desktop'
+    owner: '{{ ansible_user_id }}'
 
 - name: Update alternatives
   alternatives:
@@ -56,3 +62,11 @@
     name: x-terminal-emulator
     path: /usr/local/bin/termite-tmux
     priority: 60
+
+- name: Remove gnome-terminal
+  apt:
+    name: gnome-terminal
+    state: absent
+    purge: yes
+    autoclean: yes
+    autoremove: yes

@@ -7,7 +7,7 @@ if ! command -v ansible-playbook; then
         sudo tee /etc/apt/sources.list.d/ansible.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
     sudo apt-get update
-    sudo apt-get install -y ansible=2.5.2
+    sudo apt-get install -y ansible=2.5.2-1ppa~$codename
 fi
 
 ansible-playbook -i inventory -l local setup.yml $@

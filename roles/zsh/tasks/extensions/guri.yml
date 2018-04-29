@@ -1,0 +1,21 @@
+
+- name: Clone guri
+  git:
+    repo: https://github.com/victorfsf/guri
+    dest: /tmp/guri
+
+- name: Create custom themes folder
+  file:
+    path: "{{ zsh_custom }}/themes"
+    state: directory
+
+- name: Copy guri.zsh-theme
+  copy:
+    src: /tmp/guri/guri.zsh-theme
+    dest: "{{ zsh_custom }}/themes/guri.zsh-theme"
+    remote_src: yes
+
+- name: Remove /tmp/guri folder
+  file:
+    path: /tmp/guri
+    state: absent

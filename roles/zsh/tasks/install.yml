@@ -1,0 +1,41 @@
+
+- name: Download zsh from source
+  unarchive:
+    src: http://sourceforge.net/projects/zsh/files/zsh/{{ zsh_version }}/zsh-{{ zsh_version }}.tar.xz/download
+    dest: /tmp/
+    remote_src: yes
+
+- name: Install zsh dependencies
+  apt:
+    name: libncurses-dev
+    state: latest
+
+- name: Install zsh
+  command: chdir=/tmp/zsh-{{ zsh_version }} {{ item }}
+  loop:
+    - ./configure
+    - make
+    - make install
+
+- name: Remove zsh temp folder
+  file:
+    path: /tmp/zsh-{{ zsh_version }}
+    state: absent
+
+- name: Get zsh installation path
+  command: which zsh
+  register: zsh_path
+
+- name: Check if zsh is on /etc/shells
+  shell: cat /etc/shells | grep {{ zsh_path.stdout }}
+  register: zsh_exists
+  ignore_errors: true
+
+- name: Add zsh to /etc/shells
+  shell: command -v zsh | sudo tee -a /etc/shells
+  when: zsh_exists.rc == 1
+
+- name: Make zsh the default shell
+  user:
+    name: '{{ ansible_user_id }}'
+    shell: '{{ zsh_path.stdout }}'

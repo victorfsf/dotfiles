@@ -19,3 +19,8 @@
     - ./configure
     - make
     - make install
+
+- name: Remove tmux temp folder
+  file:
+    path: /tmp/tmux-{{ tmux_version }}
+    state: absent

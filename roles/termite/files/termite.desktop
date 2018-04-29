@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=tmux
+Icon=utilities-terminal
+Exec=termite -e tmux
+StartupNotify=false
+StartupWMClass=Termite
+X-UnityGenerated=true

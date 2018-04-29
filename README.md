@@ -5,10 +5,9 @@ Must be used locally.
 
 ## Deploy
 
-Create the following files:
+Create the following file:
 
 ```bash
-inventory  # from inventory.example
 group_vars/local  # from group_vars/local.example
 ```
 
