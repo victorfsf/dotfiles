@@ -25,3 +25,5 @@
     value: "false"
     state: present
     user: '{{ ansible_user_id }}'
+
+- import_tasks: fonts.yml

@@ -10,4 +10,4 @@ if ! command -v ansible-playbook; then
     sudo apt-get install -y ansible=2.5.2
 fi
 
-ansible-playbook -i inventory -l local setup.yml -vvv
+ansible-playbook -i inventory -l local setup.yml $@
