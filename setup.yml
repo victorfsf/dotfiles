@@ -10,22 +10,22 @@
   become_user: root
   become_method: sudo
   roles:
-    - system
-    - git
-    - tmux
-    - termite
-    - zsh
-    - fzf
-    - nvm
+    # - system
+    # - git
+    # - tmux
+    # - termite
+    # - zsh
+    # - fzf
     - pyenv
-    - vscode
-    - zenv
-    - docker
-    - redis
-    - postgres
-    - chrome
-    - yandex
-    - spotify
-    - wallpapers
-    - numix-icons
-    - adapta-theme
+    # - nvm
+    # - vscode
+    # - zenv
+    # - docker
+    # - redis
+    # - postgres
+    # - chrome
+    # - yandex
+    # - spotify
+    # - wallpapers
+    # - numix-icons
+    # - adapta-theme

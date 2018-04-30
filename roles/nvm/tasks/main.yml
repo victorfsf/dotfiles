@@ -28,26 +28,26 @@
     owner: '{{ ansible_user_id }}'
 
 - name: Install {{ node_version }}
+  shell: bash -c '{{ nvm_source }} && nvm install {{ node_version }}'
   become_user: "{{ ansible_user_id }}"
-  shell: '{{ nvm_source }} && nvm install {{ node_version }}'
   register: nvm_install_result
   changed_when: "'is already installed.' not in nvm_install_result.stdout"
 
 - name: Check if {{ node_version }} is the default node version
   become_user: "{{ ansible_user_id }}"
-  shell: '{{ nvm_source }} && nvm ls | grep "default" | head -1 | grep "{{ node_version }}"'
+  shell: bash -c '{{ nvm_source }} && nvm ls | grep "default" | head -1 | grep "{{ node_version }}"'
   register: nvm_check_default
   changed_when: false
   ignore_errors: true
 
 - name: Set default node version to {{ node_version }}
   become_user: "{{ ansible_user_id }}"
-  shell: '{{ nvm_source }} && nvm alias default {{ node_version }}'
+  shell: bash -c '{{ nvm_source }} && nvm alias default {{ node_version }}'
   when: nvm_check_default.rc != 0
 
 - name: Use default node version
   become_user: "{{ ansible_user_id }}"
-  shell: '{{ nvm_source }} && nvm use default'
+  shell: bash -c '{{ nvm_source }} && nvm use default'
 
 - name: Remove /tmp/install.sh
   file:

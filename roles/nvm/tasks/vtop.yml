@@ -5,6 +5,6 @@
   ignore_errors: true
 
 - name: Install vtop
-  command: npm install -g vtop
+  shell: bash -c '{{ nvm_source }} && npm install -g vtop'
   become_user: '{{ ansible_user_id }}'
   when: vtop_installed.rc != 0

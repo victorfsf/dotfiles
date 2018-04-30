@@ -30,14 +30,14 @@
   become_user: '{{ ansible_user_id }}'
 
 - name: Install Python versions
-  command: pyenv install {{ item }} -s
+  command: '{{ pyenv }} install {{ item }} -s'
   become_user: '{{ ansible_user_id }}'
   loop:
     - '{{ python2_version }}'
     - '{{ python3_version }}'
 
 - name: Set pyenv globals
-  command: pyenv global {{ pyenv_globals }}
+  command: '{{ pyenv }} global {{ pyenv_globals }}'
   become_user: '{{ ansible_user_id }}'
 
 - name: Install pyenv-virtualenv
