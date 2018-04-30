@@ -1,3 +1,4 @@
 roles/ssh/files/id_rsa**
 group_vars/local
 *.retry
+.vscode/
