@@ -1,0 +1,10 @@
+
+- name: Check if vtop is installed
+  command: vtop -V
+  register: vtop_installed
+  ignore_errors: true
+
+- name: Install vtop
+  command: npm install -g vtop
+  become_user: '{{ ansible_user_id }}'
+  when: vtop_installed.rc != 0

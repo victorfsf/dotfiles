@@ -3,16 +3,19 @@
   file:
     path: '{{ wallpapers_dir }}'
     state: directory
+    owner: "{{ ansible_user_id }}"
 
 - name: Copy background.jpg
   copy:
     src: background.jpg
     dest: '{{ wallpapers_dir }}/background.jpg'
+    owner: "{{ ansible_user_id }}"
 
 - name: Copy screensaver.png
   copy:
     src: screensaver.png
     dest: '{{ wallpapers_dir }}/screensaver.png'
+    owner: "{{ ansible_user_id }}"
 
 - name: Set background
   gsettings:

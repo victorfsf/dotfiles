@@ -1,0 +1,1 @@
+nvm_source: '. "{{ ansible_env.HOME }}/.nvm/nvm.sh"'

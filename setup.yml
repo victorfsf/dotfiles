@@ -10,24 +10,22 @@
   become_user: root
   become_method: sudo
   roles:
-    - system
-    - git
-    - tmux
-    - termite
-    - zsh
-    - fzf
-    - pyenv
+    # - system
+    # - git
+    # - tmux
+    # - termite
+    # - zsh
+    # - fzf
     - nvm
-    - zenv
-    - vscode
-    - docker
-    - redis
-    - postgres
-    - chrome
-    - yandex
-    - spotify
-    - wallpapers
-    - numix-icons
-    - adapta-theme
-  environment:
-    FILES_PATH: '{{ playbook_dir }}/files'
+    # - pyenv
+    # - zenv
+    # - vscode
+    # - docker
+    # - redis
+    # - postgres
+    # - chrome
+    # - yandex
+    # - spotify
+    # - wallpapers
+    # - numix-icons
+    # - adapta-theme

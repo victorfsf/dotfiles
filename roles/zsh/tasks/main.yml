@@ -5,7 +5,7 @@
   ignore_errors: true
 
 - import_tasks: install.yml
-  when: zsh_installed.rc == 1
+  when: zsh_installed.rc != 0
 
 - import_tasks: extensions/oh-my-zsh.yml
 - import_tasks: extensions/guri.yml
