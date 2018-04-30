@@ -18,11 +18,6 @@
     - xz-utils
     - zlib1g-dev
 
-- name: Check if pyenv is installed
-  command: pyenv -v
-  register: pyenv_installed
-  ignore_errors: true
-
 - name: Clone pyenv
   git:
     repo: https://github.com/pyenv/pyenv.git
@@ -43,8 +38,8 @@
 - name: Install pyenv-virtualenv
   git:
     repo: https://github.com/pyenv/pyenv-virtualenv.git
-    dest: '{{ ansible_env.PYENV_ROOT }}/plugins/pyenv-virtualenv'
+    dest: '{{ PYENV_ROOT }}/plugins/pyenv-virtualenv'
 
 - name: Install flake8 with pyenv's pip
-  command: '{{ ansible_env.PYENV_ROOT }}/shims/pip install flake8'
+  command: '{{ PYENV_ROOT }}/shims/pip install flake8'
   become_user: '{{ ansible_user_id }}'
