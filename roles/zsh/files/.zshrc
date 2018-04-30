@@ -92,11 +92,12 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# export WORKON_HOME=~/.virtualenvs
-# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-# eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export WORKON_HOME=~/.virtualenvs
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # source "$HOME/projects/z/bin/z.zsh"
 # Z_EDITOR="code"

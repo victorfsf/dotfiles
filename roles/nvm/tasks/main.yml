@@ -4,7 +4,7 @@
     name: '{{ item }}'
     update_cache: yes
     cache_valid_time: 3600
-  with_items:
+  loop:
     - git
     - curl
     - build-essential
@@ -12,7 +12,7 @@
 
 - name: Download install.sh
   get_url:
-    url: https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh
+    url: '{{ nvm_url }}'
     dest: /tmp/install-nvm.sh
     owner: '{{ ansible_user_id }}'
     mode: u+x
@@ -20,6 +20,12 @@
 - name: Run install-nvm.sh
   command: chdir=/tmp/ ./install-nvm.sh
   become_user: '{{ ansible_user_id }}'
+
+- name: Create /usr/bin/.cache
+  file:
+    path: /usr/bin/.cache
+    state: directory
+    owner: '{{ ansible_user_id }}'
 
 - name: Install {{ node_version }}
   become_user: "{{ ansible_user_id }}"

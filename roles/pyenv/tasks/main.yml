@@ -1,0 +1,50 @@
+
+- name: Install pyenv dependencies
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - build-essential
+    - curl
+    - libbz2-dev
+    - libncurses5-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - llvm
+    - make
+    - tk-dev
+    - wget
+    - xz-utils
+    - zlib1g-dev
+
+- name: Check if pyenv is installed
+  command: pyenv -v
+  register: pyenv_installed
+  ignore_errors: true
+
+- name: Clone pyenv
+  git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: '{{ ansible_env.HOME }}/.pyenv'
+  become_user: '{{ ansible_user_id }}'
+
+- name: Install Python versions
+  command: pyenv install {{ item }} -s
+  become_user: '{{ ansible_user_id }}'
+  loop:
+    - '{{ python2_version }}'
+    - '{{ python3_version }}'
+
+- name: Set pyenv globals
+  command: pyenv global {{ pyenv_globals }}
+  become_user: '{{ ansible_user_id }}'
+
+- name: Install pyenv-virtualenv
+  git:
+    repo: https://github.com/pyenv/pyenv-virtualenv.git
+    dest: '{{ ansible_env.PYENV_ROOT }}/plugins/pyenv-virtualenv'
+
+- name: Install flake8 with pyenv's pip
+  command: '{{ ansible_env.PYENV_ROOT }}/shims/pip install flake8'
+  become_user: '{{ ansible_user_id }}'

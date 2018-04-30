@@ -6,26 +6,26 @@
   gather_facts: false
   hosts: local
   user: '{{ ansible_user_id }}'
-  become: True
+  become: true
   become_user: root
   become_method: sudo
   roles:
-    # - system
-    # - git
-    # - tmux
-    # - termite
-    # - zsh
-    # - fzf
+    - system
+    - git
+    - tmux
+    - termite
+    - zsh
+    - fzf
     - nvm
-    # - pyenv
-    # - zenv
-    # - vscode
-    # - docker
-    # - redis
-    # - postgres
-    # - chrome
-    # - yandex
-    # - spotify
-    # - wallpapers
-    # - numix-icons
-    # - adapta-theme
+    - pyenv
+    - vscode
+    - zenv
+    - docker
+    - redis
+    - postgres
+    - chrome
+    - yandex
+    - spotify
+    - wallpapers
+    - numix-icons
+    - adapta-theme

@@ -1,0 +1,36 @@
+
+- name: Check if vscode is installed
+  command: code -v
+  become_user: '{{ ansible_user_id }}'
+  ignore_errors: true
+  register: code_installed
+
+- import_tasks: install.yml
+  when: code_installed.rc != 0
+
+- name: Copy code.desktop
+  copy:
+    src: code.desktop
+    dest: '{{ ansible_env.HOME }}/.local/share/applications/code.desktop'
+    owner: '{{ ansible_user_id }}'
+
+- name: Install code-settings-sync extension
+  command: code --install-extension Shan.code-settings-sync
+  become_user: '{{ ansible_user_id }}'
+
+- name: Make sure {{ vscode_user_config }} exists
+  file:
+    path: '{{ vscode_user_config }}'
+    state: directory
+
+- name: Copy settings.json
+  template:
+    src: 'settings.j2'
+    dest: '{{ vscode_user_config }}/settings.json'
+    owner: '{{ ansible_user_id }}'
+
+- name: Copy syncLocalSettings.json
+  template:
+    src: 'syncLocalSettings.j2'
+    dest: '{{ vscode_user_config }}/syncLocalSettings.json'
+    owner: '{{ ansible_user_id }}'

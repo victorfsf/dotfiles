@@ -122,3 +122,8 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export WORKON_HOME=~/.virtualenvs
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init -)"
