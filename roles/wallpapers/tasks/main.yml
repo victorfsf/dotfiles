@@ -1,0 +1,29 @@
+
+- name: Create wallpapers folder
+  file:
+    path: '{{ wallpapers_dir }}'
+    state: directory
+
+- name: Copy background.jpg
+  copy:
+    src: background.jpg
+    dest: '{{ wallpapers_dir }}/background.jpg'
+
+- name: Copy screensaver.png
+  copy:
+    src: screensaver.png
+    dest: '{{ wallpapers_dir }}/screensaver.png'
+
+- name: Set background
+  gsettings:
+    key: org.gnome.desktop.background.picture-uri
+    value: "file://{{ wallpapers_dir }}/background.jpg"
+    state: present
+    user: '{{ ansible_user_id }}'
+
+- name: Set screensaver
+  gsettings:
+    key: org.gnome.desktop.screensaver.picture-uri
+    value: "file://{{ wallpapers_dir }}/screensaver.png"
+    state: present
+    user: '{{ ansible_user_id }}'

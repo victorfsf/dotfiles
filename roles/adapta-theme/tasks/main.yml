@@ -27,7 +27,7 @@
 - name: Set Adapta Theme as default
   gsettings:
     key: '{{ item }}'
-    value: "'Adapta-Eta'"
+    value: "'Adapta-Nokto-Eta'"
     state: present
     user: '{{ ansible_user_id }}'
   loop:
