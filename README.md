@@ -1,11 +1,11 @@
 # VictorFSF's dotfiles
 
-Made with [ansible](https://www.ansible.com/) for [`Ubuntu 18.04 LTS`](http://releases.ubuntu.com/18.04/).
+Made with [ansible](https://www.ansible.com/) for [`Ubuntu 18.04 LTS`](http://releases.ubuntu.com/18.04/) (bionic).
 Must be used locally.
 
 ## Deploy
 
-Create the following file:
+Create and configure the following file:
 
 ```bash
 group_vars/local  # from group_vars/local.example
