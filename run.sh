@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! command -v ansible-playbook; then
+if ! command -v ansible-playbook >/dev/null; then
     # Install ansible
     codename=$(lsb_release -cs)
     echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu $codename main" | \

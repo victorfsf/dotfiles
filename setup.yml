@@ -24,7 +24,7 @@
     - vscode
     - docker
     - redis
-    - postgres
+    - psql
     - yandex
     - brave
     - chrome
