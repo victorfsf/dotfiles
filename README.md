@@ -11,6 +11,13 @@ Create and configure the following file:
 group_vars/local  # from group_vars/local.example
 ```
 
+Make sure your ssh private and public keys exist at:
+
+```bash
+~/.ssh/id_rsa
+~/.ssh/id_rsa.pub
+```
+
 Execute the `run.sh` file:
 
 ```bash
