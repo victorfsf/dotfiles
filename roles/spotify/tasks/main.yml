@@ -11,3 +11,9 @@
 - name: Update Spotify
   command: snap refresh spotify
   when: spotify_installed.rc == 0
+
+- name: Copy spotify.desktop
+  copy:
+    src: spotify.desktop
+    dest: '{{ ansible_env.HOME }}/.local/share/applications/spotify.desktop'
+    owner: '{{ ansible_user_id }}'

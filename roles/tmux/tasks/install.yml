@@ -12,6 +12,7 @@
   loop:
     - libevent-dev
     - libncurses-dev
+    - xclip
 
 - name: Install tmux
   command: chdir=/tmp/tmux-{{ tmux_version }} {{ item }}

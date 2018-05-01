@@ -1,5 +1,5 @@
 
-- name: Install Gnome Shell Extensions, DConf Editor & Tweak Tool
+- name: Install Gnome dependencies
   apt:
     name: '{{ item }}'
     state: latest
@@ -7,6 +7,11 @@
     - gnome-shell-extensions
     - dconf-editor
     - gnome-tweak-tool
+    - gnome-common
+    - pkg-config
+    - autoconf
+    - automake
+    - gettext
 
 - name: Configure enabled extensions
   gsettings:
@@ -18,7 +23,7 @@
 - name: Move button layout to left
   gsettings:
     key: org.gnome.desktop.wm.preferences.button-layout
-    value: "'close,maximize,minimize:'"
+    value: "'close,minimize,maximize:'"
     state: present
     user: '{{ ansible_user_id }}'
 
@@ -51,3 +56,5 @@
     path: '{{ ansible_env.HOME }}/Templates/Empty Document.txt'
     state: touch
     owner: '{{ ansible_user_id }}'
+
+- import_tasks: panel-osd.yml

@@ -5,7 +5,6 @@
     state: latest
   loop:
     - build-essential
-    - curl
     - libbz2-dev
     - libncurses5-dev
     - libreadline-dev
@@ -14,7 +13,6 @@
     - llvm
     - make
     - tk-dev
-    - wget
     - xz-utils
     - zlib1g-dev
 

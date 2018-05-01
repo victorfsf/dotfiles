@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Spotify
+Icon=spotify
+Exec=/snap/spotify/current/usr/share/spotify/spotify
+StartupNotify=false
+StartupWMClass=Spotify
+OnlyShowIn=Unity;
+X-UnityGenerated=true

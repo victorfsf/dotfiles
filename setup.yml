@@ -10,29 +10,29 @@
   become_user: root
   become_method: sudo
   roles:
-    - base
-    - git
+    # - base
+    # - git
     - interface
-    - fonts
-    - tmux
-    - termite
-    - zsh
-    - fzf
-    - nvm
-    - pyenv
-    - zenv
-    - vscode
-    - docker
-    - redis
-    - psql
-    - yandex
-    - brave
-    - chrome
-    - spotify
-    - heroku
-    - transmission
-    - gimp
-    - wallpapers
-    - numix-icons
-    - adapta-theme
-    - finish
+    # - fonts
+    # - tmux
+    # - termite
+    # - zsh
+    # - fzf
+    # - nvm
+    # - pyenv
+    # - zenv
+    # - vscode
+    # - docker
+    # - redis
+    # - psql
+    # - yandex
+    # - brave
+    # - chrome
+    # - spotify
+    # - heroku
+    # - transmission
+    # - gimp
+    # - wallpapers
+    # - numix-icons
+    # - adapta-theme
+    # - finish

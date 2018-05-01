@@ -6,7 +6,6 @@
   loop:
     - apt-transport-https
     - ca-certificates
-    - curl
     - software-properties-common
 
 - name: Add GPG key
