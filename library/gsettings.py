@@ -23,7 +23,7 @@ def _get_dbus_bus_address(user):
     try:
         pid = subprocess.check_output([
             'pgrep', '-u', user, 'gnome-session'
-        ]).strip()
+        ]).decode().strip()
     except subprocess.CalledProcessError:
         return None
 
@@ -31,7 +31,7 @@ def _get_dbus_bus_address(user):
         return subprocess.check_output([
             'grep', '-z',
             '^DBUS_SESSION_BUS_ADDRESS', '/proc/%s/environ' % pid
-        ]).strip('\0')
+        ]).decode().strip('\0')
 
 
 def _process_value(action, schemadir, user, full_key, value=None):
@@ -60,7 +60,7 @@ def _process_value(action, schemadir, user, full_key, value=None):
 
     return subprocess.check_output([
         'su', '-', user, '-c', " ".join(command)
-    ]).strip()
+    ]).decode().strip()
 
 
 def _set_value(schemadir, user, full_key, value):

@@ -1,0 +1,21 @@
+
+- name: Install Redis dependencies
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - build-essential
+    - tcl
+
+- name: Download Redis stable release
+  unarchive:
+    src: http://download.redis.io/redis-stable.tar.gz
+    dest: /tmp/
+    remote_src: true
+
+- name: Install Redis
+  command: chdir=/tmp/redis-stable {{ item }}
+  loop:
+    - make
+    - make test
+    - make install

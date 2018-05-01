@@ -45,7 +45,7 @@
     loop_var: 'async_item'
   register: python_async_poll
   until: python_async_poll.finished
-  retries: 1000
+  retries: 300
 
 - name: Set pyenv globals
   command: '{{ pyenv }} global {{ pyenv_globals }}'

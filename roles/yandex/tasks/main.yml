@@ -1,5 +1,5 @@
 
-- name: Add GPG Key
+- name: Add GPG key
   apt_key:
     url: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
     state: present

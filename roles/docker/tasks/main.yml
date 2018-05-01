@@ -1,0 +1,8 @@
+
+- name: Check if docker is installed
+  command: docker -v
+  register: docker_installed
+  ignore_errors: yes
+
+- import_tasks: install.yml
+  when: docker_installed.rc != 0

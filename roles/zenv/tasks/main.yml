@@ -1,0 +1,14 @@
+
+- name: Clone zenv
+  git:
+    repo: git@github.com:victorfsf/z.git
+    dest: '{{ ansible_env.HOME }}/.zenv'
+    accept_hostkey: yes
+  become_user: '{{ ansible_user_id }}'
+
+- name: Clone z-mixins
+  git:
+    repo: git@github.com:victorfsf/z-mixins.git
+    dest: '{{ ansible_env.HOME }}/.zenv/config/mixins'
+    accept_hostkey: yes
+  become_user: '{{ ansible_user_id }}'

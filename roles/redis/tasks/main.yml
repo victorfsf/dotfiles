@@ -1,0 +1,56 @@
+
+- name: Check if Redis is installed
+  command: redis-server -v
+  register: redis_installed
+  ignore_errors: yes
+
+- import_tasks: install.yml
+  when: redis_installed.rc != 0
+
+- name: Check if Redis group exists
+  command: getent group redis
+  register: redis_group_exists
+  ignore_errors: yes
+
+- name: Check if Redis user exists
+  command: id -u redis
+  register: redis_user_exists
+  ignore_errors: yes
+
+- name: Configure Redis group
+  group:
+    name: redis
+    system: yes
+    state: present
+  when: redis_group_exists.rc != 0
+
+- name: Configure Redis user
+  user:
+    name: redis
+    system: yes
+    create_home: no
+    group: redis
+    state: present
+  when: redis_user_exists.rc != 0
+
+- name: Create Redis directories and files
+  file:
+    path: '{{ item.path }}'
+    state: '{{ item.state }}'
+    owner: '{{ item.owner }}'
+    mode: '{{ item.mode }}'
+  loop:
+    - { path: '/etc/redis', owner: 'root', mode: 775, state: directory }
+    - { path: '/var/redis', owner: 'redis', mode: 770, state: directory }
+    - { path: '/var/log/redis.log', owner: 'redis', mode: 644, state: touch }
+
+- name: Copy redis.conf
+  template:
+    src: redis.j2
+    dest: /etc/redis/redis.conf
+    owner: redis
+
+- name: Copy redis.service
+  copy:
+    src: redis.service
+    dest: /etc/systemd/system/redis.service

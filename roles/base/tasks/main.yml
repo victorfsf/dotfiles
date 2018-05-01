@@ -3,7 +3,6 @@
   apt:
     update_cache: yes
     upgrade: yes
-    force_apt_get: true
 
 - name: Install base packages
   apt:
@@ -12,6 +11,9 @@
   loop:
     - vim
     - curl
+    - wget
+    - xclip
+    - aptitude
     - python
     - python-minimal
     - python-dev

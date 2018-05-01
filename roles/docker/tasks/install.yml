@@ -1,0 +1,31 @@
+
+- name: Install docker dependencies
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker's repository
+  apt_repository:
+    # TODO: change "artful" to "bionic" as soon as possible
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu artful stable
+    state: present
+    filename: docker
+
+- name: Run apt update
+  apt:
+    update_cache: yes
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: latest
