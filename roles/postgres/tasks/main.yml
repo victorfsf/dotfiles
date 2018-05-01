@@ -1,0 +1,28 @@
+
+- name: Install PostgreSQL packages
+  apt:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - postgresql
+    - postgresql-client
+    - postgresql-contrib
+    - libpq-dev
+    - postgresql-server-dev-10
+
+- name: Copy config.sql
+  template:
+    src: config.j2
+    dest: /tmp/config.sql
+    owner: postgres
+
+- name: Configure Postgres
+  command: psql -f /tmp/config.sql
+  become_user: postgres
+  register: sql_executed
+  failed_when: "'ERROR' in sql_executed.stderr"
+
+- name: Remove config.sql
+  file:
+    path: /tmp/config.sql
+    state: absent

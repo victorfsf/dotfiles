@@ -30,3 +30,9 @@ tmux_version: 2.7
 
 # zsh
 zsh_version: 5.5
+
+# psql
+
+psql_role_perms: SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN  # be careful with these
+psql_role_pass:  # your role password
+psql_postgres_pass:  # postgres' role password

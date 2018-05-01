@@ -5,7 +5,11 @@
   ignore_errors: true
   register: code_installed
 
-- import_tasks: install.yml
+
+- name: Download and install vscode
+  apt:
+    deb: https://go.microsoft.com/fwlink/?LinkID=760868
+    state: present
   when: code_installed.rc != 0
 
 - name: Copy code.desktop

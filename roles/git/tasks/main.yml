@@ -6,6 +6,6 @@
 
 - name: Copy .gitconfig
   template:
-    src: 'gitconfig.j2'
+    src: gitconfig.j2
     dest: '{{ ansible_env.HOME }}/.gitconfig'
     owner: '{{ ansible_user_id }}'
