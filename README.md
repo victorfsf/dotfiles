@@ -20,6 +20,8 @@ Make sure your ssh private and public keys exist at:
 
 Execute the `run.sh` file:
 
+**PS:** the `zenv` role is from a private repository, *for now*.
+
 ```bash
 # This will install ansible 2.5.2 if it's not installed;
 # Arguments to the ansible-playbook command can be passed here.
