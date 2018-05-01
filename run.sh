@@ -16,9 +16,12 @@ ssh_public="${ssh_private}.pub"
 if [[ ! -f "$ssh_private" ]] || [[ ! -f "$ssh_public" ]]; then
     echo "Add your ssh private/public keys to $HOME/.ssh before running ansible!"
     return 1
-else
-    sudo chmod 0400 "$ssh_private"
-    sudo chmod 0644 "$ssh_public"
+fi
+
+sudo chmod 0400 "$ssh_private"
+sudo chmod 0644 "$ssh_public"
+
+if ! ssh-add -L | grep "`cat $ssh_public`" >/dev/null; then
     ssh-add
 fi
 
