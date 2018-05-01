@@ -1,4 +1,20 @@
 
+- name: Install Gnome Shell Extensions, DConf Editor & Tweak Tool
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - gnome-shell-extensions
+    - dconf-editor
+    - gnome-tweak-tool
+
+- name: Configure enabled extensions
+  gsettings:
+    key: org.gnome.shell.enabled-extensions
+    value: "{{ lookup('file', 'enabled-extensions.txt') }}"
+    state: present
+    user: '{{ ansible_user_id }}'
+
 - name: Move button layout to left
   gsettings:
     key: org.gnome.desktop.wm.preferences.button-layout
@@ -6,7 +22,7 @@
     state: present
     user: '{{ ansible_user_id }}'
 
-- name: Configure launcher favorites
+- name: Configure favorite apps
   gsettings:
     key: org.gnome.shell.favorite-apps
     value: "{{ lookup('file', 'favorite-apps.txt') }}"

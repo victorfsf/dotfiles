@@ -1,0 +1,5 @@
+
+- name: Install Gimp
+  apt:
+    name: gimp
+    state: latest
