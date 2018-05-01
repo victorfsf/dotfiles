@@ -25,11 +25,27 @@
   become_user: '{{ ansible_user_id }}'
 
 - name: Install Python versions
-  command: '{{ pyenv }} install {{ item }} -s'
+  command: '{{ pyenv }} install {{ async_item }} -s'
   become_user: '{{ ansible_user_id }}'
+  async: 1200
+  poll: 0
   loop:
     - '{{ python2_version }}'
     - '{{ python3_version }}'
+  loop_control:
+    loop_var: 'async_item'
+  register: python_async
+
+- name: Check Python installation status
+  async_status:
+    jid: '{{ async_item.ansible_job_id }}'
+  become_user: '{{ ansible_user_id }}'
+  loop: '{{ python_async.results }}'
+  loop_control:
+    loop_var: 'async_item'
+  register: python_async_poll
+  until: python_async_poll.finished
+  retries: 1000
 
 - name: Set pyenv globals
   command: '{{ pyenv }} global {{ pyenv_globals }}'
@@ -40,6 +56,6 @@
     repo: https://github.com/pyenv/pyenv-virtualenv.git
     dest: '{{ PYENV_ROOT }}/plugins/pyenv-virtualenv'
 
-- name: Install flake8 with pyenv's pip
-  command: '{{ PYENV_ROOT }}/shims/pip install flake8'
+- name: Install pipenv and flake8 with pyenv's pip
+  command: '{{ PYENV_ROOT }}/shims/pip install flake8 pipenv'
   become_user: '{{ ansible_user_id }}'

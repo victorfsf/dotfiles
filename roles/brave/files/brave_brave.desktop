@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Brave
+Comment=Brave laptop and desktop browser
+GenericName=Web Browser
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/brave_brave.desktop /snap/bin/brave %U
+Icon=brave
+Type=Application
+StartupNotify=true
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml_xml;image/webp;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;

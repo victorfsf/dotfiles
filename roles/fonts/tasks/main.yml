@@ -6,7 +6,7 @@
 
 - name: Install Fira Mono for Powerline
   copy:
-    src: 'fonts/{{ item }}'
+    src: '{{ item }}'
     dest: '{{ ansible_env.HOME }}/.fonts/{{ item }}'
   loop:
     - FiraMono-Regular Powerline.otf

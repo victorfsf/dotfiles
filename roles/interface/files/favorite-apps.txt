@@ -1,8 +1,9 @@
 [
     'termite.desktop',
     'code.desktop',
-    'google-chrome.desktop',
     'yandex-browser-beta.desktop',
+    'brave_brave.desktop',
     'org.gnome.Nautilus.desktop',
-    'spotify.desktop'
+    'spotify.desktop',
+    'gnome-control-center.desktop'
 ]

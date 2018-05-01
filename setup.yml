@@ -10,8 +10,10 @@
   become_user: root
   become_method: sudo
   roles:
-    - system
+    - base
     - git
+    - interface
+    - fonts
     - tmux
     - termite
     - zsh
@@ -19,13 +21,15 @@
     - pyenv
     - nvm
     - vscode
-    - zenv
-    - docker
-    - redis
-    - postgres
-    - chrome
+    # - zenv
+    # - docker
+    # - redis
+    # - postgres
+    - brave
     - yandex
     - spotify
+    - heroku
+    - transmission
     - wallpapers
     - numix-icons
     - adapta-theme

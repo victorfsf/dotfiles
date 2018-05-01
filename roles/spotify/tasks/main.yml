@@ -1,0 +1,13 @@
+
+- name: Check if Spotify is installed
+  command: snap list spotify
+  register: spotify_installed
+  ignore_errors: true
+
+- name: Install Spotify
+  command: snap install spotify
+  when: spotify_installed.rc != 0
+
+- name: Update Spotify
+  command: snap refresh spotify
+  when: spotify_installed.rc == 0

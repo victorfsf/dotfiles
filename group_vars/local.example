@@ -23,6 +23,7 @@ pyenv_globals: 3.6.5 2.7.15rc1
 
 # nvm
 node_version: 8.11.1
+nvm_version: 0.33.11
 
 # tmux
 tmux_version: 2.7

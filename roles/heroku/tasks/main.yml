@@ -1,0 +1,13 @@
+
+- name: Check if Heroku is installed
+  command: snap list heroku
+  register: heroku_installed
+  ignore_errors: true
+
+- name: Install Heroku
+  command: snap install heroku --classic
+  when: heroku_installed.rc != 0
+
+- name: Update Heroku
+  command: snap refresh heroku
+  when: heroku_installed.rc == 0
