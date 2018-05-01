@@ -3,11 +3,6 @@
 ansible_sudo_pass:
 
 
-# Your ssh key passphrase, if it has one
-
-ssh_passphrase:
-
-
 # .gitconfig vars
 
 email:
