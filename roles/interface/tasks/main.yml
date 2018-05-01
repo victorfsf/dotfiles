@@ -22,3 +22,16 @@
   loop:
     - org.gnome.shell.extensions.dash-to-dock.dock-fixed
     - org.gnome.shell.extensions.dash-to-dock.custom-theme-customize-running-dots
+
+- name: Remove Trash from Desktop
+  gsettings:
+    key: org.gnome.nautilus.desktop.trash-icon-visible
+    value: 'false'
+    state: present
+    user: '{{ ansible_user_id }}'
+
+- name: Create base Template file
+  file:
+    path: '{{ ansible_env.HOME }}/Templates/Empty Document.txt'
+    state: touch
+    owner: '{{ ansible_user_id }}'
