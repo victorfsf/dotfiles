@@ -1,5 +1,6 @@
 [
     'user-theme@gnome-shell-extensions.gcampax.github.com',
     'ubuntu-dock@ubuntu.com',
-    'places-menu@gnome-shell-extensions.gcampax.github.com'
+    'places-menu@gnome-shell-extensions.gcampax.github.com',
+    'panel-osd@berend.de.schouwer.gmail.com'
 ]

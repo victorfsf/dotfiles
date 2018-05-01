@@ -5,11 +5,6 @@
     dest: /tmp/
     remote_src: yes
 
-- name: Install zsh dependencies
-  apt:
-    name: libncurses-dev
-    state: latest
-
 - name: Install zsh
   command: chdir=/tmp/zsh-{{ zsh_version }} {{ item }}
   loop:

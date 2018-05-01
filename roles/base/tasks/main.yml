@@ -10,6 +10,7 @@
     state: latest
   loop:
     - vim
+    - zip
     - curl
     - wget
     - xclip
@@ -22,6 +23,8 @@
     - python3-dev
     - python3-pip
     - python3-venv
+    - libxml2-dev
+    - libncurses-dev
 
 - name: Copy .bashrc
   copy:

@@ -19,6 +19,7 @@ if [[ ! -f "$ssh_private" ]] || [[ ! -f "$ssh_public" ]]; then
 else
     sudo chmod 0400 "$ssh_private"
     sudo chmod 0644 "$ssh_public"
+    ssh-add
 fi
 
 ansible-playbook -i inventory -l local setup.yml $@

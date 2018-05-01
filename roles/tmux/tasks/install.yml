@@ -7,12 +7,8 @@
 
 - name: Install tmux dependencies
   apt:
-    name: '{{ item }}'
+    name: libevent-dev
     state: latest
-  loop:
-    - libevent-dev
-    - libncurses-dev
-    - xclip
 
 - name: Install tmux
   command: chdir=/tmp/tmux-{{ tmux_version }} {{ item }}

@@ -15,7 +15,14 @@
   command: chdir=/tmp/panel-osd {{ item }}
   loop:
     - ./autogen.sh
+    - make
     - make install
+  when: panel_osd_installed.rc != 0
+
+- name: Remove /tmp/panel-osd
+  file:
+    path: /tmp/panel-osd
+    state: absent
   when: panel_osd_installed.rc != 0
 
 - name: Move Notifications Panel to top-right
