@@ -21,10 +21,13 @@
     - fzf
     - nvm
     - pyenv
+    - java
     - vscode
     - docker
+    - elasticsearch
     - redis
     - psql
+    - teamsql
     - yandex
     - brave
     - chrome

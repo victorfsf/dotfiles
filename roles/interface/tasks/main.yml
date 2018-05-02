@@ -44,6 +44,13 @@
     - org.gnome.shell.extensions.dash-to-dock.dock-fixed
     - org.gnome.shell.extensions.dash-to-dock.custom-theme-customize-running-dots
 
+- name: Resize Dash icons to 42
+  gsettings:
+    key: org.gnome.shell.extensions.dash-to-dock.dash-max-icon-size
+    value: 42
+    state: present
+    user: '{{ ansible_user_id }}'
+
 - name: Remove Trash from Desktop
   gsettings:
     key: org.gnome.nautilus.desktop.trash-icon-visible

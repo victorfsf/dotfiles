@@ -1,0 +1,4 @@
+
+- name: Install ElasticSearch
+  apt:
+    deb: '{{ elasticsearch_url }}'

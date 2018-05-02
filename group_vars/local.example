@@ -10,6 +10,11 @@ email:
 full_name:
 
 
+# Dash-to-Dock
+
+dash_icon_size: 48
+
+
 # API token with gist read/write permissions
 
 github_api_token:
@@ -45,10 +50,21 @@ zsh_version: 5.5
 # psql
 
 psql_role_perms: SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN  # be careful with these
-psql_role_pass:  # your role password
+psql_role_pass:  # your user's role password
 psql_postgres_pass:  # postgres' role password
-
+pgadmin_email:
+pgadmin_pass:
 
 # redis
 
 redis_pass:
+
+
+# java
+
+oracle_java_version: 8
+
+
+# elasticsearch
+
+elastic_search_version: 6.2.4

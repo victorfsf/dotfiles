@@ -1,0 +1,4 @@
+
+- name: Install TeamSQL
+  apt:
+    deb: https://teamsql.io/latest/linux

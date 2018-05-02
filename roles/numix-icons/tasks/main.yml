@@ -11,7 +11,6 @@
   loop:
     - numix-icon-theme
     - numix-icon-theme-circle
-    - numix-gtk-theme
 
 - name: Set Numix Icon Theme as default
   gsettings:
