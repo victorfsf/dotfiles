@@ -3,6 +3,7 @@
   apt:
     update_cache: yes
     upgrade: yes
+  tags: ['base', 'install', 'apt']
 
 - name: Install base packages
   apt:
@@ -25,9 +26,11 @@
     - python3-venv
     - libxml2-dev
     - libncurses-dev
+  tags: ['base', 'install', 'apt', 'deps']
 
 - name: Copy .bashrc
   copy:
     src: .bashrc
     dest: '{{ ansible_env.HOME }}/.bashrc'
     owner: '{{ ansible_user_id }}'
+  tags: ['base', 'copy']

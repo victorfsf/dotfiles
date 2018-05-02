@@ -13,15 +13,15 @@
     - base
     - git
     - interface
+    - fonts
     - zsh
     - zenv
-    - fonts
-    - tmux
-    - termite
     - fzf
     - nvm
     - pyenv
     - java
+    - tmux
+    - termite
     - vscode
     - docker
     - elasticsearch
