@@ -18,9 +18,12 @@ if [[ ! -f "$ssh_private" ]] || [[ ! -f "$ssh_public" ]]; then
     return 1
 fi
 
-sudo chmod 0400 "$ssh_private"
-sudo chmod 0644 "$ssh_public"
-
+if [[ "$(stat --format '%a' $ssh_private)" != 400 ]]; then
+    sudo chmod 0400 "$ssh_private"
+fi
+if [[ "$(stat --format '%a' $ssh_public)" != 644 ]]; then
+    sudo chmod 0644 "$ssh_public"
+fi
 if ! ssh-add -L | grep "`cat $ssh_public`" >/dev/null; then
     ssh-add
 fi
