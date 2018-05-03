@@ -44,7 +44,7 @@ nvm_version: 0.33.11
 
 # tmux
 
-tmux_version: 2.7
+tmux_version: '2.7'
 
 
 # zsh

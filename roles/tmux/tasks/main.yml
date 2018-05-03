@@ -10,7 +10,9 @@
 
 - block:
   - import_tasks: install.yml
-    when: tmux_installed.rc != 0
+    when: >
+      tmux_installed.rc != 0 or
+      tmux_version not in tmux_installed.stdout
 
   - name: Copy .tmux.conf
     copy:

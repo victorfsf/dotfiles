@@ -65,9 +65,14 @@
       dest: '{{ ansible_env.HOME }}/.local/share/applications/termite.desktop'
       owner: '{{ ansible_user_id }}'
 
-tags:
-  - files
-  - files-termite
+  - name: Remove /tmp/termite
+    file:
+      path: /tmp/termite
+      state: absent
+
+  tags:
+    - files
+    - files-termite
 
 - name: Update alternatives
   alternatives:

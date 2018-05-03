@@ -17,5 +17,13 @@
     environment:
       LIBRARY_PATH: "/usr/include/gtk-3.0:{{ lookup('env', 'LIBRARY_PATH') }}"
 
+  - name: Remove /tmp/vte-ng
+    file:
+      path: /tmp/vte-ng
+      state: absent
+    tags:
+      - files
+      - files-vte-ng
+
   tags:
     - install-vte-ng

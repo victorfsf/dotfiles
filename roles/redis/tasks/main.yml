@@ -45,28 +45,36 @@
     - install
     - install-redis
 
-  - block:
-    - name: Create Redis directories and files
-      file:
-        path: '{{ item.path }}'
-        state: '{{ item.state }}'
-        owner: '{{ item.owner }}'
-        mode: '{{ item.mode }}'
-      loop:
-        - { path: '/etc/redis', owner: 'root', mode: 775, state: directory }
-        - { path: '/var/redis', owner: 'redis', mode: 770, state: directory }
-        - { path: '/var/log/redis.log', owner: 'redis', mode: 644, state: touch }
+- block:
+  - name: Create Redis directories and files
+    file:
+      path: '{{ item.path }}'
+      state: '{{ item.state }}'
+      owner: '{{ item.owner }}'
+      mode: '{{ item.mode }}'
+    loop:
+      - { path: '/etc/redis', owner: 'root', mode: 775, state: directory }
+      - { path: '/var/redis', owner: 'redis', mode: 770, state: directory }
+      - { path: '/var/log/redis.log', owner: 'redis', mode: 644, state: touch }
 
-    - name: Copy redis.conf
-      template:
-        src: redis.j2
-        dest: /etc/redis/redis.conf
-        owner: redis
+  - name: Copy redis.conf
+    template:
+      src: redis.j2
+      dest: /etc/redis/redis.conf
+      owner: redis
 
-    - name: Copy redis.service
-      copy:
-        src: redis.service
-        dest: /etc/systemd/system/redis.service
-    tags:
-      - files
-      - files-redis
+  - name: Copy redis.service
+    copy:
+      src: redis.service
+      dest: /etc/systemd/system/redis.service
+
+  - name: Remove /tmp/redis-stable
+    file:
+      path: /tmp/redis-stable
+      state: absent
+
+  tags:
+    - files
+    - files-redis
+    - install
+    - install-redis
