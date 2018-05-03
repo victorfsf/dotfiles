@@ -1,19 +1,29 @@
 
-- name: Create ~/.fonts directory
-  file:
-    path: '{{ ansible_env.HOME }}/.fonts'
-    state: directory
+- block:
+  - block:
+    - name: Create ~/.fonts directory
+      file:
+        path: '{{ ansible_env.HOME }}/.fonts'
+        state: directory
 
-- name: Install Fira Mono for Powerline
-  copy:
-    src: '{{ item }}'
-    dest: '{{ ansible_env.HOME }}/.fonts/{{ item }}'
-  loop:
-    - FiraMono-Regular Powerline.otf
-    - FiraMono-Medium Powerline.otf
-    - FiraMono-Bold Powerline.otf
+    - name: Install Fira Mono for Powerline
+      copy:
+        src: '{{ item }}'
+        dest: '{{ ansible_env.HOME }}/.fonts/{{ item }}'
+      loop:
+        - FiraMono-Regular Powerline.otf
+        - FiraMono-Medium Powerline.otf
+        - FiraMono-Bold Powerline.otf
 
-- name: Install Fira Code font
-  apt:
-    name: fonts-firacode
-    state: latest
+    tags:
+      - files
+      - files-fonts
+
+  - name: Install Fira Code font
+    apt:
+      name: fonts-firacode
+      state: latest
+
+  tags:
+    - install
+    - install-fonts

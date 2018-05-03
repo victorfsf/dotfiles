@@ -6,7 +6,6 @@
   loop:
     - build-essential
     - libbz2-dev
-    - libncurses5-dev
     - libreadline-dev
     - libsqlite3-dev
     - libssl-dev

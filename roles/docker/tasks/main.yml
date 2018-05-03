@@ -3,6 +3,13 @@
   command: docker -v
   register: docker_installed
   ignore_errors: yes
+  tags:
+    - check
+    - check-docker
+    - always
 
 - import_tasks: install.yml
   when: docker_installed.rc != 0
+  tags:
+    - install
+    - install-docker

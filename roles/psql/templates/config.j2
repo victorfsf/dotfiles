@@ -8,12 +8,14 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_catalog.pg_roles WHERE rolname = '{{ ansible_user_id }}') THEN
         CREATE ROLE {{ ansible_user_id }};
     END IF;
+    {% if psql_role_perms %}
     ALTER ROLE {{ ansible_user_id }} WITH
         {{ psql_role_perms }}
         {% if psql_role_pass %}
         ENCRYPTED PASSWORD '{{ psql_role_pass }}'
         {% endif %}
     ;
+    {% endif %}
 END
 $do$;
 

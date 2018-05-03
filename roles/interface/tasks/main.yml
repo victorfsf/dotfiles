@@ -12,7 +12,11 @@
     - autoconf
     - automake
     - gettext
-  tags: ['interface', 'install', 'deps', 'apt']
+  tags:
+    - install
+    - install-interface
+    - deps
+    - install-deps-interface
 
 - block:
   - name: Configure enabled extensions
@@ -59,13 +63,17 @@
       value: 'false'
       state: present
       user: '{{ ansible_user_id }}'
-  tags: ['interface', 'gsettings']
+  tags:
+    - gsettings
+    - gsettings-interface
 
 - name: Create base Template file
   file:
     path: '{{ ansible_env.HOME }}/Templates/Empty Document.txt'
     state: touch
     owner: '{{ ansible_user_id }}'
-  tags: ['interface', 'file']
+  tags:
+    - files
+    - files-interface
 
 - import_tasks: panel-osd.yml

@@ -3,10 +3,28 @@
   command: zsh --version
   register: zsh_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-zsh
+    - always
 
-- import_tasks: install.yml
-  when: zsh_installed.rc != 0
+- block:
+  - import_tasks: install.yml
+    when: zsh_version not in zsh_installed.stdout
 
-- import_tasks: extensions/oh-my-zsh.yml
-- import_tasks: extensions/guri.yml
-- import_tasks: extensions/zsh-syntax-highlighting.yml
+  - import_tasks: extensions/oh-my-zsh.yml
+  - import_tasks: extensions/guri.yml
+  - import_tasks: extensions/zsh-syntax-highlighting.yml
+
+  - name: Copy .zshrc
+    copy:
+      src: .zshrc
+      dest: "{{ ansible_env.HOME }}/.zshrc"
+      owner: "{{ ansible_user_id }}"
+    tags:
+     - files
+     - files-zsh
+
+  tags:
+    - install
+    - install-zsh

@@ -1,4 +1,19 @@
 
+- name: Check ElasticSearch version
+  command: elasticsearch -V
+  register: elasticsearch_installed
+  ignore_errors: yes
+  tags:
+    - check
+    - check-elasticsearch
+    - always
+
 - name: Install ElasticSearch
   apt:
     deb: '{{ elasticsearch_url }}'
+  when: >
+    elasticsearch_installed.rc != 0 or
+    elasticsearch_version not in elasticsearch_installed.stdout
+  tags:
+    - install
+    - install-elasticsearch

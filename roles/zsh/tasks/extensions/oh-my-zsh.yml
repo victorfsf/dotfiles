@@ -3,9 +3,3 @@
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
-
-- name: Copy .zshrc
-  copy:
-    src: .zshrc
-    dest: "{{ ansible_env.HOME }}/.zshrc"
-    owner: "{{ ansible_user_id }}"

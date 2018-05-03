@@ -3,9 +3,16 @@
   command: google-chrome -h
   register: chrome_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-chrome
+    - always
 
 - name: Download and install Google Chrome
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     state: present
   when: chrome_installed.rc != 0
+  tags:
+    - install
+    - install-chrome

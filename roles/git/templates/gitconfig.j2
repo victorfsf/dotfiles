@@ -1,48 +1,48 @@
 [user]
-        email = {{ email }}
-        name = {{ full_name }}
+    email = {{ email }}
+    name = {{ full_name }}
 [core]
-        editor = vim
+    editor = vim
 [alias]
-        cp = cherry-pick
-        st = status -s
-        cl = clone
-        ci = commit
-        co = checkout
-        br = branch
-        diff = diff --word-diff
-        dc = diff --cached
-        ls = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
-        ll = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
-        lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-        lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-        ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-        le = log --oneline --decorate
-        fl = log -u
-        dl = "!git ll -1"
-        dlc = diff --cached HEAD^
-        find = "!git ls-files | grep -i"
-        gr = grep -Ii
-        alias = "!git config -l | grep alias | cut -c 7-"
-        assume = update-index --assume-unchanged
-        unassume = update-index --no-assume-unchanged
-        assumed = "!git ls-files -v | grep ^h | cut -c 3-"
-        unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
-        assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
-        lasttag = describe --tags --abbrev=0
-        ours = "!f() { git co --ours $@ && git add $@; }; f"
-        theirs = "!f() { git co --theirs $@ && git add $@; }; f"
-        r = reset
-        r1 = reset HEAD^
-        r2 = reset HEAD^^
-        rh = reset --hard
-        rh1 = reset HEAD^ --hard
-        rh2 = reset HEAD^^ --hard
-        sl = stash list
-        sa = stash apply
-        ss = stash save
-        ps = push
-        pl = pull
-        pso = push origin
-        plo = pull origin
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    ci = commit
+    co = checkout
+    br = branch
+    diff = diff --word-diff
+    dc = diff --cached
+    ls = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+    ll = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    le = log --oneline --decorate
+    fl = log -u
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+    find = "!git ls-files | grep -i"
+    gr = grep -Ii
+    alias = "!git config -l | grep alias | cut -c 7-"
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+    unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+    assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
+    lasttag = describe --tags --abbrev=0
+    ours = "!f() { git co --ours $@ && git add $@; }; f"
+    theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+    r = reset
+    r1 = reset HEAD^
+    r2 = reset HEAD^^
+    rh = reset --hard
+    rh1 = reset HEAD^ --hard
+    rh2 = reset HEAD^^ --hard
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+    ps = push
+    pl = pull
+    pso = push origin
+    plo = pull origin
 

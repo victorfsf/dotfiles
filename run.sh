@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! command -v ansible-playbook >/dev/null; then
-    # Install ansible
+    # Install ansible 2.5.2
     codename=$(lsb_release -cs)
     echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu $codename main" | \
         sudo tee /etc/apt/sources.list.d/ansible.list
@@ -15,7 +15,7 @@ ssh_public="${ssh_private}.pub"
 
 if [[ ! -f "$ssh_private" ]] || [[ ! -f "$ssh_public" ]]; then
     echo "Add your ssh private/public keys to $HOME/.ssh before running ansible!"
-    return 1
+    exit 1
 fi
 
 if [[ "$(stat --format '%a' $ssh_private)" != 400 ]]; then
@@ -26,6 +26,12 @@ if [[ "$(stat --format '%a' $ssh_public)" != 644 ]]; then
 fi
 if ! ssh-add -L | grep "`cat $ssh_public`" >/dev/null; then
     ssh-add
+    code="$?"
+    [[ "$code" -ne 0 ]] && exit "$code"
 fi
 
-ansible-playbook -i inventory -l local setup.yml $@
+if ! command -v dotfiles >/dev/null; then
+    source "$(dirname $0)/dotfiles.sh"
+fi
+
+dotfiles $@

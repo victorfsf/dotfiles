@@ -10,34 +10,127 @@
   become_user: root
   become_method: sudo
   roles:
-    - base
-    - git
-    - interface
-    - fonts
-    - zsh
-    - zenv
-    - fzf
-    - nvm
-    - pyenv
-    - java
-    - tmux
-    - termite
-    - vscode
-    - docker
-    - elasticsearch
-    - redis
-    - psql
-    - teamsql
-    - yandex
-    - brave
-    - chrome
-    - spotify
-    - vlc
-    - heroku
-    - transmission
-    - gimp
-    - libreoffice
-    - wallpapers
-    - numix-icons
-    - adapta-theme
-    - finish
+    - role: base
+      tags:
+        - base
+        - never
+    - role: git
+      tags:
+        - git
+        - never
+    - role: interface
+      tags:
+        - interface
+        - never
+    - role: fonts
+      tags:
+        - fonts
+        - never
+    - role: zsh
+      tags:
+        - zsh
+        - never
+    - role: zenv
+      tags:
+        - zenv
+        - never
+    - role: fzf
+      tags:
+        - fzf
+        - never
+    - role: nvm
+      tags:
+        - nvm
+        - never
+    - role: pyenv
+      tags:
+        - pyenv
+        - never
+    - role: java
+      tags:
+        - java
+        - never
+    - role: tmux
+      tags:
+        - tmux
+        - never
+    - role: termite
+      tags:
+        - termite
+        - never
+    - role: vscode
+      tags:
+        - vscode
+        - never
+    - role: docker
+      tags:
+        - docker
+        - never
+    - role: elasticsearch
+      tags:
+        - elasticsearch
+        - never
+    - role: redis
+      tags:
+        - redis
+        - never
+    - role: psql
+      tags:
+        - psql
+        - never
+    - role: teamsql
+      tags:
+        - teamsql
+        - never
+    - role: yandex
+      tags:
+        - yandex
+        - never
+    - role: brave
+      tags:
+        - brave
+        - never
+    - role: chrome
+      tags:
+        - chrome
+        - never
+    - role: spotify
+      tags:
+        - spotify
+        - never
+    - role: vlc
+      tags:
+        - vlc
+        - never
+    - role: heroku
+      tags:
+        - heroku
+        - never
+    - role: transmission
+      tags:
+        - transmission
+        - never
+    - role: gimp
+      tags:
+        - gimp
+        - never
+    - role: libreoffice
+      tags:
+        - libreoffice
+        - never
+    - role: wallpapers
+      tags:
+        - wallpapers
+        - never
+    - role: numix-icons
+      tags:
+        - numix-icons
+        - never
+    - role: adapta-theme
+      tags:
+        - adapta-theme
+        - never
+    - role: finish
+      tags:
+        - finish
+        - never

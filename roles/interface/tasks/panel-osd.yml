@@ -4,30 +4,41 @@
   register: panel_osd_installed
   become_user: '{{ ansible_user_id }}'
   ignore_errors: true
-  tags: ['interface', 'command', 'check']
+  tags:
+    - check
+    - check-interface
+    - gsettings
+    - gsettings-interface
+    - always
 
-- name: Clone panel-osd
-  git:
-    repo: https://github.com/jenslody/gnome-shell-extension-panel-osd.git
-    dest: /tmp/panel-osd
-  when: panel_osd_installed.rc != 0
-  tags: ['interface', 'repo']
+- block:
+  - name: Clone panel-osd
+    git:
+      repo: https://github.com/jenslody/gnome-shell-extension-panel-osd.git
+      dest: /tmp/panel-osd
+    tags:
+      - files
+      - files-interface
 
-- name: Install panel-osd Gnome Extension
-  command: chdir=/tmp/panel-osd {{ item }}
-  loop:
-    - ./autogen.sh
-    - make
-    - make install
-  when: panel_osd_installed.rc != 0
-  tags: ['interface', 'command', 'install']
+  - name: Install panel-osd Gnome Extension
+    command: chdir=/tmp/panel-osd {{ item }}
+    loop:
+      - ./autogen.sh
+      - make
+      - make install
 
-- name: Remove /tmp/panel-osd
-  file:
-    path: /tmp/panel-osd
-    state: absent
+  - name: Remove /tmp/panel-osd
+    file:
+      path: /tmp/panel-osd
+      state: absent
+    tags:
+      - files
+      - files-interface
+
   when: panel_osd_installed.rc != 0
-  tags: ['interface', 'file', 'delete']
+  tags:
+    - install
+    - install-interface
 
 - name: Move Notifications Panel to top-right
   gsettings:
@@ -37,4 +48,6 @@
   loop:
     - x-pos
     - y-pos
-  tags: ['interface', 'gsettings']
+  tags:
+    - gsettings
+    - gsettings-interface

@@ -3,11 +3,15 @@
   apt:
     name: git
     state: latest
-  tags: ['git', 'install', 'apt']
+  tags:
+    - install
+    - install-git
 
 - name: Copy .gitconfig
   template:
     src: gitconfig.j2
     dest: '{{ ansible_env.HOME }}/.gitconfig'
     owner: '{{ ansible_user_id }}'
-  tags: ['git', 'template', 'copy']
+  tags:
+    - files
+    - files-git

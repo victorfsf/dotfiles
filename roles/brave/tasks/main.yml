@@ -3,16 +3,29 @@
   command: snap list brave
   register: brave_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-brave
+    - always
 
 - name: Install Brave Browser
   command: snap install brave --classic
   when: brave_installed.rc != 0
+  tags:
+    - install
+    - install-brave
 
 - name: Update Brave Browser
   command: snap refresh brave
   when: brave_installed.rc == 0
+  tags:
+    - install
+    - install-brave
 
 - name: Copy brave_brave.desktop
   copy:
     src: brave_brave.desktop
     dest: '{{ ansible_env.HOME }}/.local/share/applications/brave_brave.desktop'
+  tags:
+    - files
+    - files-brave

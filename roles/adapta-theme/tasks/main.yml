@@ -1,20 +1,28 @@
 
-- name: Add Adapta's ppa
-  apt_repository:
-    repo: 'ppa:tista/adapta'
-    codename: bionic
+- block:
+  - name: Add Adapta's ppa
+    apt_repository:
+      repo: 'ppa:tista/adapta'
+      codename: bionic
 
-- name: Install Adapta Theme
-  apt:
-    name: adapta-gtk-theme
-    state: latest
+  - name: Install Adapta Theme
+    apt:
+      name: adapta-gtk-theme
+      state: latest
 
-- name: Set Adapta Theme as default
-  gsettings:
-    key: '{{ item }}'
-    value: "'Adapta-Nokto-Eta'"
-    state: present
-    user: '{{ ansible_user_id }}'
-  loop:
-    - org.gnome.desktop.interface.gtk-theme
-    - org.gnome.shell.extensions.user-theme.name
+  - name: Set Adapta Theme as default
+    gsettings:
+      key: '{{ item }}'
+      value: "'{{ gnome_theme }}'"
+      state: present
+      user: '{{ ansible_user_id }}'
+    loop:
+      - org.gnome.desktop.interface.gtk-theme
+      - org.gnome.shell.extensions.user-theme.name
+    tags:
+      - gsettings
+      - gsettings-adapta-theme
+
+  tags:
+    - install
+    - install-adapta-theme

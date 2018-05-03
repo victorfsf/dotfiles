@@ -15,6 +15,11 @@ full_name:
 dash_icon_size: 48
 
 
+# Gnome theme name
+
+gnome_theme: Adapta-Eta
+
+
 # API token with gist read/write permissions
 
 github_api_token:

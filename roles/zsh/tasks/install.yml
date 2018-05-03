@@ -1,9 +1,12 @@
 
 - name: Download zsh from source
   unarchive:
-    src: http://sourceforge.net/projects/zsh/files/zsh/{{ zsh_version }}/zsh-{{ zsh_version }}.tar.xz/download
+    src: '{{ zsh_download }}'
     dest: /tmp/
     remote_src: yes
+  tags:
+    - files
+    - files-zsh
 
 - name: Install zsh
   command: chdir=/tmp/zsh-{{ zsh_version }} {{ item }}
@@ -16,6 +19,9 @@
   file:
     path: /tmp/zsh-{{ zsh_version }}
     state: absent
+  tags:
+    - files
+    - files-zsh
 
 - name: Get zsh installation path
   command: which zsh
