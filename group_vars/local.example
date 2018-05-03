@@ -58,6 +58,7 @@ psql_role_perms: SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN  # be careful with 
 psql_role_pass:  # your user's role password
 psql_postgres_pass:  # postgres' role password
 
+
 # redis
 
 redis_pass:
