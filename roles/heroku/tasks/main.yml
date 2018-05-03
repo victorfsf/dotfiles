@@ -3,11 +3,21 @@
   command: snap list heroku
   register: heroku_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-heroku
+    - always
 
 - name: Install Heroku
   command: snap install heroku --classic
   when: heroku_installed.rc != 0
+  tags:
+    - install
+    - install-heroku
 
 - name: Update Heroku
   command: snap refresh heroku
   when: heroku_installed.rc == 0
+  tags:
+    - install
+    - install-heroku

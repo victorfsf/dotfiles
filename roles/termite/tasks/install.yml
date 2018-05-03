@@ -16,14 +16,22 @@
     - libgirepository1.0-dev
     - libxml2-utils
     - gperf
+  tags:
+    - deps
+    - deps-termite
 
 - import_tasks: vte-ng.yml
+  tags:
+    - install-vte-ng
 
 - name: Clone Termite's repository
   git:
     repo: https://github.com/thestinger/termite.git
     recursive: yes
     dest: /tmp/termite
+  tags:
+    - files
+    - files-termite
 
 - name: Install Termite
   command: chdir=/tmp/termite {{ item }}
@@ -32,29 +40,34 @@
     - make install
     - ldconfig
 
-- name: Create /lib/terminfo/x directory
-  file:
-    path: /lib/terminfo/x
-    state: directory
+- block:
+  - name: Create /lib/terminfo/x directory
+    file:
+      path: /lib/terminfo/x
+      state: directory
 
-- name: Link xterm-termite to /lib/terminfo/x
-  file:
-    src: /usr/local/share/terminfo/x/xterm-termite
-    dest: /lib/terminfo/x/xterm-termite
-    state: link
+  - name: Link xterm-termite to /lib/terminfo/x
+    file:
+      src: /usr/local/share/terminfo/x/xterm-termite
+      dest: /lib/terminfo/x/xterm-termite
+      state: link
 
-- name: Copy termite-tmux script
-  copy:
-    src: termite-tmux
-    dest: /usr/local/bin/termite-tmux
-    owner: '{{ ansible_user_id }}'
-    mode: u+x
+  - name: Copy termite-tmux script
+    copy:
+      src: termite-tmux
+      dest: /usr/local/bin/termite-tmux
+      owner: '{{ ansible_user_id }}'
+      mode: u+x
 
-- name: Copy termite.desktop
-  copy:
-    src: termite.desktop
-    dest: '{{ ansible_env.HOME }}/.local/share/applications/termite.desktop'
-    owner: '{{ ansible_user_id }}'
+  - name: Copy termite.desktop
+    copy:
+      src: termite.desktop
+      dest: '{{ ansible_env.HOME }}/.local/share/applications/termite.desktop'
+      owner: '{{ ansible_user_id }}'
+
+tags:
+  - files
+  - files-termite
 
 - name: Update alternatives
   alternatives:

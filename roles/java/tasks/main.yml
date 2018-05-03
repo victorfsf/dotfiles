@@ -1,21 +1,33 @@
 
-- name: Add Oracle JDK repository
-  apt_repository:
-    repo: ppa:webupd8team/java
-    state: present
+- block:
+  - name: Install Java dependencies
+    apt:
+      name: ca-certificates
+      state: latest
+    tags:
+      - deps
+      - deps-java
 
-- name: Set Oracle license as accepted
-  debconf:
-    name: oracle-java{{ oracle_java_version }}-installer
-    question: shared/accepted-oracle-license-v1-1
-    value: 'true'
-    vtype: select
+  - name: Add Oracle JDK repository
+    apt_repository:
+      repo: ppa:webupd8team/java
+      state: present
 
-- name: Install Oracle JDK {{ oracle_java_version }}
-  apt:
-    name: '{{ item }}'
-    state: latest
-  loop:
-    - oracle-java{{ oracle_java_version }}-installer
-    - ca-certificates
-    - oracle-java{{ oracle_java_version }}-set-default
+  - name: Set Oracle license as accepted
+    debconf:
+      name: oracle-java{{ oracle_java_version }}-installer
+      question: shared/accepted-oracle-license-v1-1
+      value: 'true'
+      vtype: select
+
+  - name: Install Oracle JDK {{ oracle_java_version }}
+    apt:
+      name: '{{ item }}'
+      state: latest
+    loop:
+      - oracle-java{{ oracle_java_version }}-installer
+      - oracle-java{{ oracle_java_version }}-set-default
+
+  tags:
+    - install
+    - install-java

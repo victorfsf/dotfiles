@@ -3,17 +3,29 @@
   command: snap list spotify
   register: spotify_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-spotify
+    - always
 
-- name: Install Spotify
-  command: snap install spotify
-  when: spotify_installed.rc != 0
+- block:
+  - name: Install Spotify
+    command: snap install spotify
+    when: spotify_installed.rc != 0
 
-- name: Update Spotify
-  command: snap refresh spotify
-  when: spotify_installed.rc == 0
+  - name: Update Spotify
+    command: snap refresh spotify
+    when: spotify_installed.rc == 0
 
-- name: Copy spotify.desktop
-  copy:
-    src: spotify.desktop
-    dest: '{{ ansible_env.HOME }}/.local/share/applications/spotify.desktop'
-    owner: '{{ ansible_user_id }}'
+  - name: Copy spotify.desktop
+    copy:
+      src: spotify.desktop
+      dest: '{{ ansible_env.HOME }}/.local/share/applications/spotify.desktop'
+      owner: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-spotify
+
+  tags:
+    - install
+    - install-spotify

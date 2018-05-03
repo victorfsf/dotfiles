@@ -1,20 +1,25 @@
 
-- name: Add GPG key
-  apt_key:
-    url: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
-    state: present
+- block:
+  - name: Add GPG key
+    apt_key:
+      url: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
+      state: present
 
-- name: Add Yandex Browser's repository
-  apt_repository:
-    repo: deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb beta main
-    state: present
-    filename: yandex-browser
+  - name: Add Yandex Browser's repository
+    apt_repository:
+      repo: deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb beta main
+      state: present
+      filename: yandex-browser
 
-- name: Run apt update
-  apt:
-    update_cache: yes
+  - name: Run apt update
+    apt:
+      update_cache: yes
 
-- name: Install Yandex Browser
-  apt:
-    name: yandex-browser-beta
-    state: latest
+  - name: Install Yandex Browser
+    apt:
+      name: yandex-browser-beta
+      state: latest
+
+  tags:
+    - install
+    - install-yandex

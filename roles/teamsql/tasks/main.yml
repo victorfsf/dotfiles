@@ -1,4 +1,17 @@
 
+- name: Check if TeamSQL is installed
+  command: which TeamSQL
+  register: teamsql_installed
+  ignore_errors: true
+  tags:
+    - check
+    - check-teamsql
+    - always
+
 - name: Install TeamSQL
   apt:
     deb: https://teamsql.io/latest/linux
+  tags:
+    - install
+    - install-teamsql
+  when: teamsql_installed.rc != 0

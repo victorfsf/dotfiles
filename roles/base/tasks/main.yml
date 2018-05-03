@@ -28,8 +28,8 @@
       - libxml2-dev
       - libncurses5-dev
     tags:
-      - install-deps
-      - install-deps-base
+      - deps
+      - deps-base
 
   - name: Copy .bashrc
     copy:

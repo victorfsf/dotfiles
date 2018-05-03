@@ -3,3 +3,6 @@
   apt:
     name: transmission
     state: latest
+  tags:
+    - install
+    - install-transmission

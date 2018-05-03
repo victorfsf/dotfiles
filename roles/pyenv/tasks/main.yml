@@ -1,58 +1,69 @@
 
-- name: Install pyenv dependencies
-  apt:
-    name: '{{ item }}'
-    state: latest
-  loop:
-    - build-essential
-    - libbz2-dev
-    - libreadline-dev
-    - libsqlite3-dev
-    - libssl-dev
-    - llvm
-    - make
-    - tk-dev
-    - xz-utils
-    - zlib1g-dev
+- block:
+  - name: Install pyenv dependencies
+    apt:
+      name: '{{ item }}'
+      state: latest
+    loop:
+      - build-essential
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - libssl-dev
+      - llvm
+      - make
+      - tk-dev
+      - xz-utils
+      - zlib1g-dev
+    tags:
+      - deps
+      - deps-pyenv
 
-- name: Clone pyenv
-  git:
-    repo: https://github.com/pyenv/pyenv.git
-    dest: '{{ ansible_env.HOME }}/.pyenv'
-  become_user: '{{ ansible_user_id }}'
+  - name: Clone pyenv
+    git:
+      repo: https://github.com/pyenv/pyenv.git
+      dest: '{{ ansible_env.HOME }}/.pyenv'
+    become_user: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-pyenv
 
-- name: Install Python versions
-  command: '{{ pyenv }} install {{ async_item }} -s'
-  become_user: '{{ ansible_user_id }}'
-  async: 1200
-  poll: 0
-  loop:
-    - '{{ python2_version }}'
-    - '{{ python3_version }}'
-  loop_control:
-    loop_var: 'async_item'
-  register: python_async
+  - name: Install Python versions
+    command: '{{ pyenv }} install {{ async_item }} -s'
+    become_user: '{{ ansible_user_id }}'
+    async: 1200
+    poll: 0
+    loop:
+      - '{{ python2_version }}'
+      - '{{ python3_version }}'
+    loop_control:
+      loop_var: 'async_item'
+    register: python_async
 
-- name: Check Python installation status
-  async_status:
-    jid: '{{ async_item.ansible_job_id }}'
-  become_user: '{{ ansible_user_id }}'
-  loop: '{{ python_async.results }}'
-  loop_control:
-    loop_var: 'async_item'
-  register: python_async_poll
-  until: python_async_poll.finished
-  retries: 300
+  - name: Check Python installation status
+    async_status:
+      jid: '{{ async_item.ansible_job_id }}'
+    become_user: '{{ ansible_user_id }}'
+    loop: '{{ python_async.results }}'
+    loop_control:
+      loop_var: 'async_item'
+    register: python_async_poll
+    until: python_async_poll.finished
+    retries: 300
 
-- name: Set pyenv globals
-  command: '{{ pyenv }} global {{ pyenv_globals }}'
-  become_user: '{{ ansible_user_id }}'
+  - name: Set pyenv globals
+    command: '{{ pyenv }} global {{ pyenv_globals }}'
+    become_user: '{{ ansible_user_id }}'
 
-- name: Install pyenv-virtualenv
-  git:
-    repo: https://github.com/pyenv/pyenv-virtualenv.git
-    dest: '{{ PYENV_ROOT }}/plugins/pyenv-virtualenv'
+  - name: Install pyenv-virtualenv
+    git:
+      repo: https://github.com/pyenv/pyenv-virtualenv.git
+      dest: '{{ PYENV_ROOT }}/plugins/pyenv-virtualenv'
 
-- name: Install pipenv and flake8 with pyenv's pip
-  command: '{{ PYENV_ROOT }}/shims/pip install flake8 pipenv'
-  become_user: '{{ ansible_user_id }}'
+  - name: Install pipenv and flake8 with pyenv's pip
+    command: '{{ PYENV_ROOT }}/shims/pip install flake8 pipenv'
+    become_user: '{{ ansible_user_id }}'
+
+  tags:
+    - install
+    - install-pyenv

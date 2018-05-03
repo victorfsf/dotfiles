@@ -3,3 +3,6 @@
   apt:
     name: libreoffice
     state: latest
+  tags:
+    - install
+    - install-libreoffice

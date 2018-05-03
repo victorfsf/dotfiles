@@ -21,8 +21,8 @@
       - org.gnome.shell.extensions.user-theme.name
     tags:
       - gsettings
-      - gsettings-adapta-theme
+      - gsettings-adapta
 
   tags:
     - install
-    - install-adapta-theme
+    - install-adapta

@@ -1,56 +1,80 @@
 
-- name: Install dependencies
-  apt:
-    name: '{{ item }}'
-    update_cache: yes
-    cache_valid_time: 3600
-  loop:
-    - git
-    - build-essential
-    - libssl-dev
+- block:
+  - name: Install dependencies
+    apt:
+      name: '{{ item }}'
+      update_cache: yes
+      cache_valid_time: 3600
+    loop:
+      - git
+      - build-essential
+      - libssl-dev
+    tags:
+      - deps
+      - deps-nvm
 
-- name: Download install.sh
-  get_url:
-    url: '{{ nvm_url }}'
-    dest: /tmp/install-nvm.sh
-    owner: '{{ ansible_user_id }}'
-    mode: u+x
+  - name: Download install.sh
+    get_url:
+      url: '{{ nvm_url }}'
+      dest: /tmp/install-nvm.sh
+      owner: '{{ ansible_user_id }}'
+      mode: u+x
+    tags:
+      - files
+      - files-nvm
 
-- name: Run install-nvm.sh
-  command: chdir=/tmp/ ./install-nvm.sh
-  become_user: '{{ ansible_user_id }}'
+  - name: Run install-nvm.sh
+    command: chdir=/tmp/ ./install-nvm.sh
+    become_user: '{{ ansible_user_id }}'
 
-- name: Create /usr/bin/.cache
-  file:
-    path: /usr/bin/.cache
-    state: directory
-    owner: '{{ ansible_user_id }}'
+  - name: Create /usr/bin/.cache
+    file:
+      path: /usr/bin/.cache
+      state: directory
+      owner: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-nvm
 
-- name: Install {{ node_version }}
-  shell: bash -c '{{ nvm_source }} && nvm install {{ node_version }}'
-  become_user: "{{ ansible_user_id }}"
-  register: nvm_install_result
-  changed_when: "'is already installed.' not in nvm_install_result.stdout"
+  - name: Install {{ node_version }}
+    shell: bash -c '{{ nvm_source }} && nvm install {{ node_version }}'
+    become_user: "{{ ansible_user_id }}"
+    register: nvm_install_result
+    changed_when: "'is already installed.' not in nvm_install_result.stdout"
 
-- name: Check if {{ node_version }} is the default node version
-  become_user: "{{ ansible_user_id }}"
-  shell: bash -c '{{ nvm_source }} && nvm ls | grep "default" | head -1 | grep "{{ node_version }}"'
-  register: nvm_check_default
-  changed_when: false
-  ignore_errors: true
+  - name: Check if {{ node_version }} is the default node version
+    become_user: "{{ ansible_user_id }}"
+    shell: bash -c '{{ nvm_source }} && nvm ls | grep "default" | head -1 | grep "{{ node_version }}"'
+    register: nvm_check_default
+    changed_when: false
+    ignore_errors: true
+    tags:
+      - check
+      - check-nvm
+      - always
 
-- name: Set default node version to {{ node_version }}
-  become_user: "{{ ansible_user_id }}"
-  shell: bash -c '{{ nvm_source }} && nvm alias default {{ node_version }}'
-  when: nvm_check_default.rc != 0
+  - name: Set default node version to {{ node_version }}
+    become_user: "{{ ansible_user_id }}"
+    shell: bash -c '{{ nvm_source }} && nvm alias default {{ node_version }}'
+    when: nvm_check_default.rc != 0
 
-- name: Use default node version
-  become_user: "{{ ansible_user_id }}"
-  shell: bash -c '{{ nvm_source }} && nvm use default'
+  - name: Use default node version
+    become_user: "{{ ansible_user_id }}"
+    shell: bash -c '{{ nvm_source }} && nvm use default'
 
-- name: Remove /tmp/install.sh
-  file:
-    path: /tmp/install.sh
-    state: absent
+  - name: Remove /tmp/install.sh
+    file:
+      path: /tmp/install.sh
+      state: absent
+    tags:
+      - files
+      - files-nvm
+
+  tags:
+    - install
+    - install-nvm
 
 - import_tasks: vtop.yml
+  tags:
+    - install
+    - install-vtop

@@ -4,11 +4,17 @@
     src: https://github.com/tmux/tmux/releases/download/{{ tmux_version }}/tmux-{{ tmux_version }}.tar.gz
     dest: /tmp/
     remote_src: yes
+  tags:
+    - files
+    - files-tmux
 
 - name: Install tmux dependencies
   apt:
     name: libevent-dev
     state: latest
+  tags:
+    - deps
+    - deps-tmux
 
 - name: Install tmux
   command: chdir=/tmp/tmux-{{ tmux_version }} {{ item }}
@@ -21,3 +27,6 @@
   file:
     path: /tmp/tmux-{{ tmux_version }}
     state: absent
+  tags:
+    - files
+    - files-tmux

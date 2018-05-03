@@ -6,6 +6,9 @@
   loop:
     - build-essential
     - tcl
+  tags:
+    - deps
+    - deps-redis
 
 - name: Download Redis stable release
   unarchive:
@@ -19,3 +22,4 @@
     - make
     - make test
     - make install
+

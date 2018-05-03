@@ -3,6 +3,10 @@
   command: vtop -V
   register: vtop_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-vtop
+    - always
 
 - name: Install vtop
   shell: bash -c '{{ nvm_source }} && npm install -g vtop'

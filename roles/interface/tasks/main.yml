@@ -16,7 +16,7 @@
     - install
     - install-interface
     - deps
-    - install-deps-interface
+    - deps-interface
 
 - block:
   - name: Configure enabled extensions

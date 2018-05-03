@@ -49,7 +49,7 @@ tmux_version: 2.7
 
 # zsh
 
-zsh_version: 5.5
+zsh_version: '5.5'
 
 
 # psql
@@ -72,4 +72,4 @@ oracle_java_version: 8
 
 # elasticsearch
 
-elastic_search_version: 6.2.4
+elastic_search_version: '6.2.4'

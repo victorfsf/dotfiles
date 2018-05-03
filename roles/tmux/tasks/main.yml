@@ -3,16 +3,25 @@
   command: tmux -V
   register: tmux_installed
   ignore_errors: true
+  tags:
+    - check
+    - check-tmux
+    - always
 
-- import_tasks: install.yml
-  when: tmux_installed.rc != 0
+- block:
+  - import_tasks: install.yml
+    when: tmux_installed.rc != 0
 
-- name: Copy .tmux.conf
-  copy:
-    src: .tmux.conf
-    dest: '{{ ansible_env.HOME }}/.tmux.conf'
-    owner: '{{ ansible_user_id }}'
+  - name: Copy .tmux.conf
+    copy:
+      src: .tmux.conf
+      dest: '{{ ansible_env.HOME }}/.tmux.conf'
+      owner: '{{ ansible_user_id }}'
 
-- name: Restart tmux
-  command: tmux kill-server
-  ignore_errors: true
+  - name: Restart tmux
+    command: tmux kill-server
+    ignore_errors: true
+
+  tags:
+    - install
+    - install-tmux

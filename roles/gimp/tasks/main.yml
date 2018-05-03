@@ -3,3 +3,6 @@
   apt:
     name: gimp
     state: latest
+  tags:
+    - install
+    - install-gimp

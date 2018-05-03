@@ -122,13 +122,13 @@
       tags:
         - wallpapers
         - never
-    - role: numix-icons
+    - role: numix
       tags:
-        - numix-icons
+        - numix
         - never
-    - role: adapta-theme
+    - role: adapta
       tags:
-        - adapta-theme
+        - adapta
         - never
     - role: finish
       tags:

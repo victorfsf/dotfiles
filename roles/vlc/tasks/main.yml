@@ -3,3 +3,6 @@
   apt:
     name: vlc
     state: latest
+  tags:
+    - install
+    - install-vlc

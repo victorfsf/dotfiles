@@ -13,8 +13,16 @@
     when: zsh_version not in zsh_installed.stdout
 
   - import_tasks: extensions/oh-my-zsh.yml
+    tags:
+      - install-oh-my-zsh
+
   - import_tasks: extensions/guri.yml
+    tags:
+      - install-guri
+
   - import_tasks: extensions/zsh-syntax-highlighting.yml
+    tags:
+      - install-zsh-syntax-highlightning
 
   - name: Copy .zshrc
     copy:
