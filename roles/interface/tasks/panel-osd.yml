@@ -1,15 +1,18 @@
 
+- name: Check if panel-osd is installed
+  command: gsettings list-keys org.gnome.shell.extensions.panel-osd
+  register: panel_osd_installed
+  become_user: '{{ ansible_user_id }}'
+  ignore_errors: true
+  tags:
+    - check
+    - check-interface
+    - gsettings
+    - gsettings-interface
+    - install
+    - install-interface
+
 - block:
-  - name: Check if panel-osd is installed
-    command: gsettings list-keys org.gnome.shell.extensions.panel-osd
-    register: panel_osd_installed
-    become_user: '{{ ansible_user_id }}'
-    ignore_errors: true
-    tags:
-      - check
-      - check-interface
-      - gsettings
-      - gsettings-interface
 
   - name: Clone panel-osd
     git:

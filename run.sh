@@ -24,8 +24,10 @@ fi
 if [[ "$(stat --format '%a' $ssh_public)" != 644 ]]; then
     sudo chmod 0644 "$ssh_public"
 fi
-if ! ssh-add -L | grep "`cat $ssh_public`" >/dev/null; then
-    ssh-add
+
+key=(`cat $ssh_public`)
+if ! ssh-add -L | grep "${key[1]}" >/dev/null; then
+    ssh-add "$ssh_private"
     code="$?"
     [[ "$code" -ne 0 ]] && exit "$code"
 fi

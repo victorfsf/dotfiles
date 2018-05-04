@@ -1,7 +1,7 @@
 
 - block:
   - name: Check ElasticSearch version
-    command: elasticsearch -V
+    command: /usr/share/elasticsearch/bin/elasticsearch -V
     register: elasticsearch_installed
     ignore_errors: yes
     tags:
