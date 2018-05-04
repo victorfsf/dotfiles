@@ -1,14 +1,13 @@
 
-- name: Check if Spotify is installed
-  command: snap list spotify
-  register: spotify_installed
-  ignore_errors: true
-  tags:
-    - check
-    - check-spotify
-    - always
-
 - block:
+  - name: Check if Spotify is installed
+    command: snap list spotify
+    register: spotify_installed
+    ignore_errors: true
+    tags:
+      - check
+      - check-spotify
+
   - name: Install Spotify
     command: snap install spotify
     when: spotify_installed.rc != 0

@@ -1,25 +1,25 @@
 
 - block:
-  - name: Check if Redis is installed
-    command: redis-server -v
-    register: redis_installed
-    ignore_errors: yes
 
-  - name: Check if Redis group exists
-    command: getent group redis
-    register: redis_group_exists
-    ignore_errors: yes
+  - block:
+    - name: Check if Redis is installed
+      command: redis-server -v
+      register: redis_installed
+      ignore_errors: yes
 
-  - name: Check if Redis user exists
-    command: id -u redis
-    register: redis_user_exists
-    ignore_errors: yes
-  tags:
-    - check
-    - check-redis
-    - always
+    - name: Check if Redis group exists
+      command: getent group redis
+      register: redis_group_exists
+      ignore_errors: yes
 
-- block:
+    - name: Check if Redis user exists
+      command: id -u redis
+      register: redis_user_exists
+      ignore_errors: yes
+    tags:
+      - check
+      - check-redis
+
   - import_tasks: install.yml
     when: redis_installed.rc != 0
 
@@ -29,9 +29,6 @@
       system: yes
       state: present
     when: redis_group_exists.rc != 0
-    tags:
-      - install
-      - install-redis
 
   - name: Configure Redis user
     user:

@@ -44,8 +44,8 @@
     become_user: "{{ ansible_user_id }}"
     shell: bash -c '{{ nvm_source }} && nvm ls | grep "default" | head -1 | grep "{{ node_version }}"'
     register: nvm_check_default
-    changed_when: false
-    ignore_errors: true
+    changed_when: no
+    ignore_errors: yes
     tags:
       - check
       - check-nvm
@@ -75,4 +75,5 @@
 - import_tasks: vtop.yml
   tags:
     - install
+    - install-nvm
     - install-vtop

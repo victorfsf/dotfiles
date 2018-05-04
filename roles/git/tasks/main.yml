@@ -1,17 +1,19 @@
 
-- name: Install git
-  apt:
-    name: git
-    state: latest
+- block:
+  - name: Install git
+    apt:
+      name: git
+      state: latest
+
+  - name: Copy .gitconfig
+    template:
+      src: gitconfig.j2
+      dest: '{{ ansible_env.HOME }}/.gitconfig'
+      owner: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-git
+
   tags:
     - install
     - install-git
-
-- name: Copy .gitconfig
-  template:
-    src: gitconfig.j2
-    dest: '{{ ansible_env.HOME }}/.gitconfig'
-    owner: '{{ ansible_user_id }}'
-  tags:
-    - files
-    - files-git

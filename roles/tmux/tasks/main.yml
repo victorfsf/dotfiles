@@ -1,14 +1,14 @@
 
-- name: Check tmux version
-  command: tmux -V
-  register: tmux_installed
-  ignore_errors: true
-  tags:
-    - check
-    - check-tmux
-    - always
-
 - block:
+
+  - name: Check tmux version
+    command: tmux -V
+    register: tmux_installed
+    ignore_errors: true
+    tags:
+      - check
+      - check-tmux
+
   - import_tasks: install.yml
     when: >
       tmux_installed.rc != 0 or

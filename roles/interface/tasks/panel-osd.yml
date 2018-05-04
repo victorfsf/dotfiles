@@ -1,17 +1,16 @@
 
-- name: Check if panel-osd is installed
-  command: gsettings list-keys org.gnome.shell.extensions.panel-osd
-  register: panel_osd_installed
-  become_user: '{{ ansible_user_id }}'
-  ignore_errors: true
-  tags:
-    - check
-    - check-interface
-    - gsettings
-    - gsettings-interface
-    - always
-
 - block:
+  - name: Check if panel-osd is installed
+    command: gsettings list-keys org.gnome.shell.extensions.panel-osd
+    register: panel_osd_installed
+    become_user: '{{ ansible_user_id }}'
+    ignore_errors: true
+    tags:
+      - check
+      - check-interface
+      - gsettings
+      - gsettings-interface
+
   - name: Clone panel-osd
     git:
       repo: https://github.com/jenslody/gnome-shell-extension-panel-osd.git
@@ -35,19 +34,19 @@
       - files
       - files-interface
 
+  - name: Move Notifications Panel to top-right
+    gsettings:
+      key: org.gnome.shell.extensions.panel-osd.{{ item }}
+      value: 100.0
+      user: '{{ ansible_user_id }}'
+    loop:
+      - x-pos
+      - y-pos
+    tags:
+      - gsettings
+      - gsettings-interface
+
   when: panel_osd_installed.rc != 0
   tags:
     - install
     - install-interface
-
-- name: Move Notifications Panel to top-right
-  gsettings:
-    key: org.gnome.shell.extensions.panel-osd.{{ item }}
-    value: 100.0
-    user: '{{ ansible_user_id }}'
-  loop:
-    - x-pos
-    - y-pos
-  tags:
-    - gsettings
-    - gsettings-interface

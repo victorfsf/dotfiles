@@ -1,14 +1,13 @@
 
-- name: Check if zsh is installed
-  command: zsh --version
-  register: zsh_installed
-  ignore_errors: true
-  tags:
-    - check
-    - check-zsh
-    - always
-
 - block:
+  - name: Check if zsh is installed
+    command: zsh --version
+    register: zsh_installed
+    ignore_errors: true
+    tags:
+      - check
+      - check-zsh
+
   - import_tasks: install.yml
     when: >
       zsh_installed.rc != 0 or

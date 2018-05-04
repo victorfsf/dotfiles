@@ -1,15 +1,14 @@
 
-- name: Check if vscode is installed
-  command: code -v
-  become_user: '{{ ansible_user_id }}'
-  ignore_errors: true
-  register: code_installed
-  tags:
-    - check
-    - check-vscode
-    - always
-
 - block:
+  - name: Check if vscode is installed
+    command: code -v
+    become_user: '{{ ansible_user_id }}'
+    ignore_errors: true
+    register: code_installed
+    tags:
+      - check
+      - check-vscode
+
   - name: Download and install vscode
     apt:
       deb: https://go.microsoft.com/fwlink/?LinkID=760868

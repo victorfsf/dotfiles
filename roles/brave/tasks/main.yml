@@ -1,31 +1,29 @@
 
-- name: Check if Brave is installed
-  command: snap list brave
-  register: brave_installed
-  ignore_errors: true
-  tags:
-    - check
-    - check-brave
-    - always
+- block:
+  - name: Check if Brave is installed
+    command: snap list brave
+    register: brave_installed
+    ignore_errors: yes
+    tags:
+      - check
+      - check-brave
 
-- name: Install Brave Browser
-  command: snap install brave --classic
-  when: brave_installed.rc != 0
+  - name: Install Brave Browser
+    command: snap install brave --classic
+    when: brave_installed.rc != 0
+
+  - name: Update Brave Browser
+    command: snap refresh brave
+    when: brave_installed.rc == 0
+
+  - name: Copy brave_brave.desktop
+    copy:
+      src: brave_brave.desktop
+      dest: '{{ ansible_env.HOME }}/.local/share/applications/brave_brave.desktop'
+    tags:
+      - files
+      - files-brave
+
   tags:
     - install
     - install-brave
-
-- name: Update Brave Browser
-  command: snap refresh brave
-  when: brave_installed.rc == 0
-  tags:
-    - install
-    - install-brave
-
-- name: Copy brave_brave.desktop
-  copy:
-    src: brave_brave.desktop
-    dest: '{{ ansible_env.HOME }}/.local/share/applications/brave_brave.desktop'
-  tags:
-    - files
-    - files-brave

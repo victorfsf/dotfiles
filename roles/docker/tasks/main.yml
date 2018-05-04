@@ -1,15 +1,16 @@
 
-- name: Check if docker is installed
-  command: docker -v
-  register: docker_installed
-  ignore_errors: yes
-  tags:
-    - check
-    - check-docker
-    - always
+- block:
+  - name: Check if docker is installed
+    command: docker -v
+    register: docker_installed
+    ignore_errors: yes
+    tags:
+      - check
+      - check-docker
 
-- import_tasks: install.yml
-  when: docker_installed.rc != 0
+  - import_tasks: install.yml
+    when: docker_installed.rc != 0
+
   tags:
     - install
     - install-docker

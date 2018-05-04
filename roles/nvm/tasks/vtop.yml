@@ -2,11 +2,10 @@
 - name: Check if vtop is installed
   command: bash -c '{{ nvm_source }} && vtop -V'
   register: vtop_installed
-  ignore_errors: true
+  ignore_errors: yes
   tags:
     - check
     - check-vtop
-    - always
 
 - name: Install vtop
   shell: bash -c '{{ nvm_source }} && npm install -g vtop'

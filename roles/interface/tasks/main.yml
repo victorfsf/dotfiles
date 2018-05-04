@@ -1,79 +1,82 @@
 
-- name: Install Gnome dependencies
-  apt:
-    name: '{{ item }}'
-    state: latest
-  loop:
-    - gnome-shell-extensions
-    - dconf-editor
-    - gnome-tweak-tool
-    - gnome-common
-    - pkg-config
-    - autoconf
-    - automake
-    - gettext
+- block:
+  - name: Install Gnome dependencies
+    apt:
+      name: '{{ item }}'
+      state: latest
+    loop:
+      - gnome-shell-extensions
+      - dconf-editor
+      - gnome-tweak-tool
+      - gnome-common
+      - pkg-config
+      - autoconf
+      - automake
+      - gettext
+    tags:
+      - deps
+      - deps-interface
+
+  - block:
+    - name: Configure enabled extensions
+      gsettings:
+        key: org.gnome.shell.enabled-extensions
+        value: "{{ lookup('file', 'enabled-extensions.txt') }}"
+        state: present
+        user: '{{ ansible_user_id }}'
+
+    - name: Move button layout to left
+      gsettings:
+        key: org.gnome.desktop.wm.preferences.button-layout
+        value: "'close,minimize,maximize:'"
+        state: present
+        user: '{{ ansible_user_id }}'
+
+    - name: Configure favorite apps
+      gsettings:
+        key: org.gnome.shell.favorite-apps
+        value: "{{ lookup('file', 'favorite-apps.txt') }}"
+        state: present
+        user: '{{ ansible_user_id }}'
+
+    - name: Configure Dash-To-Dock
+      gsettings:
+        key: '{{ item }}'
+        value: "false"
+        state: present
+        user: '{{ ansible_user_id }}'
+      loop:
+        - org.gnome.shell.extensions.dash-to-dock.dock-fixed
+        - org.gnome.shell.extensions.dash-to-dock.custom-theme-customize-running-dots
+
+    - name: Resize Dash icons to 42
+      gsettings:
+        key: org.gnome.shell.extensions.dash-to-dock.dash-max-icon-size
+        value: 42
+        state: present
+        user: '{{ ansible_user_id }}'
+
+    - name: Remove Trash from Desktop
+      gsettings:
+        key: org.gnome.nautilus.desktop.trash-icon-visible
+        value: 'false'
+        state: present
+        user: '{{ ansible_user_id }}'
+    tags:
+      - gsettings
+      - gsettings-interface
+
+  - name: Create base Template file
+    file:
+      path: '{{ ansible_env.HOME }}/Templates/Empty Document.txt'
+      state: touch
+      owner: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-interface
+
+  - import_tasks: panel-osd.yml
+
   tags:
     - install
     - install-interface
-    - deps
-    - deps-interface
-
-- block:
-  - name: Configure enabled extensions
-    gsettings:
-      key: org.gnome.shell.enabled-extensions
-      value: "{{ lookup('file', 'enabled-extensions.txt') }}"
-      state: present
-      user: '{{ ansible_user_id }}'
-
-  - name: Move button layout to left
-    gsettings:
-      key: org.gnome.desktop.wm.preferences.button-layout
-      value: "'close,minimize,maximize:'"
-      state: present
-      user: '{{ ansible_user_id }}'
-
-  - name: Configure favorite apps
-    gsettings:
-      key: org.gnome.shell.favorite-apps
-      value: "{{ lookup('file', 'favorite-apps.txt') }}"
-      state: present
-      user: '{{ ansible_user_id }}'
-
-  - name: Configure Dash-To-Dock
-    gsettings:
-      key: '{{ item }}'
-      value: "false"
-      state: present
-      user: '{{ ansible_user_id }}'
-    loop:
-      - org.gnome.shell.extensions.dash-to-dock.dock-fixed
-      - org.gnome.shell.extensions.dash-to-dock.custom-theme-customize-running-dots
-
-  - name: Resize Dash icons to 42
-    gsettings:
-      key: org.gnome.shell.extensions.dash-to-dock.dash-max-icon-size
-      value: 42
-      state: present
-      user: '{{ ansible_user_id }}'
-
-  - name: Remove Trash from Desktop
-    gsettings:
-      key: org.gnome.nautilus.desktop.trash-icon-visible
-      value: 'false'
-      state: present
-      user: '{{ ansible_user_id }}'
-  tags:
-    - gsettings
-    - gsettings-interface
-
-- name: Create base Template file
-  file:
-    path: '{{ ansible_env.HOME }}/Templates/Empty Document.txt'
-    state: touch
-    owner: '{{ ansible_user_id }}'
-  tags:
-    - files
-    - files-interface
-
-- import_tasks: panel-osd.yml

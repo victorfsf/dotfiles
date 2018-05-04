@@ -1,12 +1,12 @@
 - name: Gather Facts
-  gather_facts: true
+  gather_facts: yes
   hosts: local
 
 - name: Setup dotfiles
-  gather_facts: false
+  gather_facts: no
   hosts: local
   user: '{{ ansible_user_id }}'
-  become: true
+  become: yes
   become_user: root
   become_method: sudo
   roles:
