@@ -88,3 +88,13 @@
     purge: yes
     autoclean: yes
     autoremove: yes
+
+- name: Link termite-tmux to gnome-terminal
+  file:
+    src: /usr/local/bin/termite-tmux
+    dest: /usr/bin/gnome-terminal
+    state: link
+    remote_src: yes
+  tags:
+    - files
+    - files-termite

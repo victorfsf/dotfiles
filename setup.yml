@@ -94,6 +94,9 @@
     - role: wallpapers
       tags:
         - wallpapers
+    - role: nemo
+      tags:
+        - nemo
     - role: numix
       tags:
         - numix

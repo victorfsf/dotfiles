@@ -1,0 +1,61 @@
+
+- block:
+  - name: Install Nemo
+    apt:
+      name: nemo
+      state: latest
+
+  - name: Set Nemo as default File Manager
+    command: >
+      xdg-mime default nemo.desktop
+      inode/directory application/x-gnome-saved-search
+
+  - name: Copy nemo.desktop
+    copy:
+      src: nemo.desktop
+      dest: '{{ ansible_env.HOME }}/.local/share/applications/nemo.desktop'
+      owner: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-nemo
+
+  - block:
+    - name: Set Nemo preferences
+      gsettings:
+        key: org.nemo.preferences.{{ item }}
+        value: 'true'
+        state: present
+        user: '{{ ansible_user_id }}'
+      loop:
+      - show-open-in-terminal-toolbar
+      - tooltips-in-icon-view
+      - tooltips-on-desktop
+      - tooltips-show-mod-date
+
+    - name: Set Nemo default-zoom-level to small
+      gsettings:
+        key: org.nemo.icon-view.default-zoom-level
+        value: "'small'"
+        state: present
+        user: '{{ ansible_user_id }}'
+
+    - name: Set Nemo side-pane-view to tree
+      gsettings:
+        key: org.nemo.window-state.side-pane-view
+        value: "'tree'"
+        state: present
+        user: '{{ ansible_user_id }}'
+
+    tags:
+      - gsettings
+      - gsettings-nemo
+
+  - name: Remove Nautilus
+    apt:
+      name: nautilus
+      state: absent
+      purge: no
+
+  tags:
+    - install
+    - install-nemo
