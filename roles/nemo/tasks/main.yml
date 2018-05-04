@@ -57,12 +57,6 @@
       - gsettings
       - gsettings-nemo
 
-  - name: Remove Nautilus
-    apt:
-      name: nautilus
-      state: absent
-      purge: no
-
   tags:
     - install
     - install-nemo
