@@ -49,7 +49,6 @@
     tags:
       - check
       - check-nvm
-      - always
 
   - name: Set default node version to {{ node_version }}
     become_user: "{{ ansible_user_id }}"

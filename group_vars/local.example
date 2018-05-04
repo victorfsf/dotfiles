@@ -72,3 +72,8 @@ oracle_java_version: 8
 # elasticsearch
 
 elasticsearch_version: '6.2.4'
+
+
+# ag
+
+ag_version: '2.1.0'

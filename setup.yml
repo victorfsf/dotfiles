@@ -28,6 +28,9 @@
     - role: zenv
       tags:
         - zenv
+    - role: ag
+      tags:
+        - ag
     - role: fzf
       tags:
         - fzf

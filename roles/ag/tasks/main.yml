@@ -1,0 +1,43 @@
+
+- block:
+  - name: Install Ag dependencies
+    apt:
+      name: '{{ item }}'
+      state: latest
+    loop:
+      - libpcre3-dev
+      - zlib1g-dev
+      - liblzma-dev
+    tags:
+     - deps
+     - deps-ag
+
+  - block:
+    - name: Download Ag
+      unarchive:
+        src: '{{ ag_url }}'
+        dest: /tmp/
+        remote_src: yes
+        owner: '{{ ansible_user_id }}'
+    tags:
+      - files
+      - files-ag
+
+  - name: Install Ag
+    command: chdir=/tmp/the_silver_searcher-{{ ag_version }} {{ item }}
+    loop:
+      - ./configure
+      - make
+      - make install
+
+  - name: Remove /tmp/the_silver_searcher-{{ ag_version }}
+    file:
+      path: /tmp/the_silver_searcher-{{ ag_version }}
+      state: absent
+    tags:
+      - files
+      - files-ag
+
+  tags:
+    - install
+    - install-ag
