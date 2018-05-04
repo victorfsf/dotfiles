@@ -24,9 +24,6 @@
       repo: https://github.com/pyenv/pyenv.git
       dest: '{{ ansible_env.HOME }}/.pyenv'
     become_user: '{{ ansible_user_id }}'
-    tags:
-      - files
-      - files-pyenv
 
   - name: Install Python versions
     command: '{{ pyenv }} install {{ async_item }} -s'

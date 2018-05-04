@@ -17,9 +17,6 @@
       src: config.j2
       dest: /tmp/config.sql
       owner: postgres
-    tags:
-      - files
-      - files-psql
 
   - name: Configure Postgres
     command: psql -f /tmp/config.sql
@@ -31,9 +28,6 @@
     file:
       path: /tmp/config.sql
       state: absent
-    tags:
-      - files
-      - files-psql
 
   tags:
     - install

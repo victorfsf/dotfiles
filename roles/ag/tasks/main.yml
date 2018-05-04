@@ -19,9 +19,6 @@
         dest: /tmp/
         remote_src: yes
         owner: '{{ ansible_user_id }}'
-    tags:
-      - files
-      - files-ag
 
   - name: Install Ag
     command: chdir=/tmp/the_silver_searcher-{{ ag_version }} {{ item }}
@@ -34,9 +31,6 @@
     file:
       path: /tmp/the_silver_searcher-{{ ag_version }}
       state: absent
-    tags:
-      - files
-      - files-ag
 
   tags:
     - install

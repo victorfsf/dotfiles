@@ -3,7 +3,7 @@
     'code.desktop',
     'yandex-browser-beta.desktop',
     'brave_brave.desktop',
-    'org.gnome.Nautilus.desktop',
+    'nemo.desktop',
     'spotify.desktop',
     'gnome-control-center.desktop'
 ]

@@ -15,9 +15,6 @@
     git:
       repo: https://github.com/jenslody/gnome-shell-extension-panel-osd.git
       dest: /tmp/panel-osd
-    tags:
-      - files
-      - files-interface
 
   - name: Install panel-osd Gnome Extension
     command: chdir=/tmp/panel-osd {{ item }}
@@ -30,9 +27,6 @@
     file:
       path: /tmp/panel-osd
       state: absent
-    tags:
-      - files
-      - files-interface
 
   - name: Move Notifications Panel to top-right
     gsettings:

@@ -4,9 +4,6 @@
     src: '{{ zsh_download }}'
     dest: /tmp/
     remote_src: yes
-  tags:
-    - files
-    - files-zsh
 
 - name: Install zsh
   command: chdir=/tmp/zsh-{{ zsh_version }} {{ item }}
@@ -19,9 +16,6 @@
   file:
     path: /tmp/zsh-{{ zsh_version }}
     state: absent
-  tags:
-    - files
-    - files-zsh
 
 - name: Get zsh installation path
   command: which zsh
@@ -31,6 +25,9 @@
   shell: cat /etc/shells | grep {{ zsh_path.stdout }}
   register: zsh_exists
   ignore_errors: true
+  tags:
+    - check
+    - check-zsh
 
 - name: Add zsh to /etc/shells
   shell: command -v zsh | sudo tee -a /etc/shells

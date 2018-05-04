@@ -17,9 +17,6 @@
       dest: /tmp/install-nvm.sh
       owner: '{{ ansible_user_id }}'
       mode: u+x
-    tags:
-      - files
-      - files-nvm
 
   - name: Run install-nvm.sh
     command: chdir=/tmp/ ./install-nvm.sh
@@ -30,9 +27,6 @@
       path: /usr/bin/.cache
       state: directory
       owner: '{{ ansible_user_id }}'
-    tags:
-      - files
-      - files-nvm
 
   - name: Install {{ node_version }}
     shell: bash -c '{{ nvm_source }} && nvm install {{ node_version }}'
@@ -63,9 +57,6 @@
     file:
       path: /tmp/install.sh
       state: absent
-    tags:
-      - files
-      - files-nvm
 
   tags:
     - install

@@ -65,13 +65,16 @@
       src: redis.service
       dest: /etc/systemd/system/redis.service
 
-  - name: Remove /tmp/redis-stable
-    file:
-      path: /tmp/redis-stable
-      state: absent
-
   tags:
     - files
     - files-redis
+    - install
+    - install-redis
+
+- name: Remove /tmp/redis-stable
+  file:
+    path: /tmp/redis-stable
+    state: absent
+  tags:
     - install
     - install-redis

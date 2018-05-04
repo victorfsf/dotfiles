@@ -28,12 +28,12 @@
     - role: zenv
       tags:
         - zenv
-    - role: ag
-      tags:
-        - ag
     - role: fzf
       tags:
         - fzf
+    - role: ag
+      tags:
+        - ag
     - role: nvm
       tags:
         - nvm

@@ -4,9 +4,6 @@
     git:
       repo: https://github.com/thestinger/vte-ng.git
       dest: /tmp/vte-ng
-    tags:
-      - files
-      - files-vte-ng
 
   - name: Install vte-ng
     command: chdir=/tmp/vte-ng {{ item }}
@@ -21,9 +18,6 @@
     file:
       path: /tmp/vte-ng
       state: absent
-    tags:
-      - files
-      - files-vte-ng
 
   tags:
     - install-vte-ng
