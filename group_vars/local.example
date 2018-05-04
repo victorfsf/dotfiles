@@ -71,4 +71,4 @@ oracle_java_version: 8
 
 # elasticsearch
 
-elastic_search_version: '6.2.4'
+elasticsearch_version: '6.2.4'
