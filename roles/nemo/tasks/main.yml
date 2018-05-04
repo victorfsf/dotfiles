@@ -46,6 +46,13 @@
         state: present
         user: '{{ ansible_user_id }}'
 
+    - name: Set Nemo sidebar-width to 200
+      gsettings:
+        key: org.nemo.window-state.sidebar-width
+        value: 200
+        state: present
+        user: '{{ ansible_user_id }}'
+
     tags:
       - gsettings
       - gsettings-nemo
