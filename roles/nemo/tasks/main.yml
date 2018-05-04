@@ -10,11 +10,20 @@
       xdg-mime default nemo.desktop
       inode/directory application/x-gnome-saved-search
 
-  - name: Copy nemo.desktop
-    copy:
-      src: nemo.desktop
-      dest: '{{ ansible_env.HOME }}/.local/share/applications/nemo.desktop'
-      owner: '{{ ansible_user_id }}'
+  - block:
+    - name: Copy nemo.desktop
+      copy:
+        src: nemo.desktop
+        dest: '{{ icons }}/nemo.desktop'
+        owner: '{{ ansible_user_id }}'
+
+    - name: Copy nautilus.desktop
+      copy:
+        src: nautilus.desktop
+        dest: '{{ icons }}/nautilus.desktop'
+        owner: '{{ ansible_user_id }}'
+    vars:
+      icons: '{{ ansible_env.HOME }}/.local/share/applications'
     tags:
       - files
       - files-nemo
