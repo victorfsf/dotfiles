@@ -66,15 +66,6 @@
       - gsettings
       - gsettings-interface
 
-  - name: Create base Template file
-    file:
-      path: '{{ ansible_env.HOME }}/Templates/Empty Document.txt'
-      state: touch
-      owner: '{{ ansible_user_id }}'
-    tags:
-      - files
-      - files-interface
-
   - import_tasks: panel-osd.yml
 
   tags:

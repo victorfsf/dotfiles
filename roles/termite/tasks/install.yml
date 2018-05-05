@@ -29,9 +29,6 @@
     repo: https://github.com/thestinger/termite.git
     recursive: yes
     dest: /tmp/termite
-  tags:
-    - files
-    - files-termite
 
 - name: Install Termite
   command: chdir=/tmp/termite {{ item }}
@@ -39,40 +36,6 @@
     - make
     - make install
     - ldconfig
-
-- block:
-  - name: Create /lib/terminfo/x directory
-    file:
-      path: /lib/terminfo/x
-      state: directory
-
-  - name: Link xterm-termite to /lib/terminfo/x
-    file:
-      src: /usr/local/share/terminfo/x/xterm-termite
-      dest: /lib/terminfo/x/xterm-termite
-      state: link
-
-  - name: Copy termite-tmux script
-    copy:
-      src: termite-tmux
-      dest: /usr/local/bin/termite-tmux
-      owner: '{{ ansible_user_id }}'
-      mode: u+x
-
-  - name: Copy termite.desktop
-    copy:
-      src: termite.desktop
-      dest: '{{ ansible_env.HOME }}/.local/share/applications/termite.desktop'
-      owner: '{{ ansible_user_id }}'
-
-  - name: Remove /tmp/termite
-    file:
-      path: /tmp/termite
-      state: absent
-
-  tags:
-    - files
-    - files-termite
 
 - name: Update alternatives
   alternatives:
@@ -89,12 +52,7 @@
     autoclean: yes
     autoremove: yes
 
-- name: Link termite-tmux to gnome-terminal
+- name: Remove /tmp/termite
   file:
-    src: /usr/local/bin/termite-tmux
-    dest: /usr/bin/gnome-terminal
-    state: link
-    remote_src: yes
-  tags:
-    - files
-    - files-termite
+    path: /tmp/termite
+    state: absent
