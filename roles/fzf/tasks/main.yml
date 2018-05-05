@@ -7,7 +7,7 @@
       depth: 1
 
   - name: Install fzf
-    command: chdir='{{ ansible_env.HOME }}/.fzf' ./install
+    shell: chdir='' yes | {{ ansible_env.HOME }}/.fzf/install
 
   tags:
     - install

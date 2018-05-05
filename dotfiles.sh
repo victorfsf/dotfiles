@@ -2,10 +2,10 @@
 
 dotfiles() {
     local code
-    cd "$(dirname $0)"
+    cd "${DOTFILES_DIR:-$HOME/.dotfiles}"
     ansible-playbook -i inventory -l local setup.yml $@
     code="$?"
-    cd -
+    cd - >/dev/null
 
     return "$code"
 }
