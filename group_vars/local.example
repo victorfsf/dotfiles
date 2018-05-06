@@ -77,3 +77,8 @@ elasticsearch_version: '6.2.4'
 # ag
 
 ag_version: '2.1.0'
+
+
+# gron
+
+gron_version: '0.5.2'

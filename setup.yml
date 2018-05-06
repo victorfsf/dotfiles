@@ -34,6 +34,9 @@
     - role: ag
       tags:
         - ag
+    - role: gron
+      tags:
+        - gron
     - role: nvm
       tags:
         - nvm

@@ -1,0 +1,23 @@
+
+- block:
+  - name: Check if gron is installed
+    command: gron --version
+    register: gron_installed
+    ignore_errors: yes
+    tags:
+      - check
+      - check-gron
+
+  - name: Download and Install gron
+    unarchive:
+      src: '{{ gron_url }}'
+      dest: /usr/local/bin/
+      remote_src: yes
+      owner: '{{ ansible_user_id }}'
+    when: >
+      gron_installed.rc != 0 or
+      gron_version not in gron_installed.stdout
+
+  tags:
+    - install
+    - install-gron

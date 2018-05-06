@@ -1,0 +1,1 @@
+gron_url: https://github.com/tomnomnom/gron/releases/download/v{{ gron_version }}/gron-linux-amd64-{{ gron_version }}.tgz
