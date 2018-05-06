@@ -14,6 +14,7 @@
     src: /tmp/guri/guri.zsh-theme
     dest: "{{ zsh_custom }}/themes/guri.zsh-theme"
     remote_src: yes
+    owner: '{{ ansible_user_id }}'
 
 - name: Remove /tmp/guri folder
   file:

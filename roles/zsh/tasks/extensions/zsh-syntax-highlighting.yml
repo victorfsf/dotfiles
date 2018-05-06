@@ -3,3 +3,4 @@
   git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: "{{ zsh_custom }}/plugins/zsh-syntax-highlighting"
+    owner: '{{ ansible_user_id }}'
