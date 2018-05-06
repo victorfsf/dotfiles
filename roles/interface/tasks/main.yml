@@ -56,12 +56,15 @@
         state: present
         user: '{{ ansible_user_id }}'
 
-    - name: Remove Trash from Desktop
+    - name: Remove Trash and Volumes from Desktop
       gsettings:
-        key: org.gnome.nautilus.desktop.trash-icon-visible
+        key: '{{ item }}'
         value: 'false'
         state: present
         user: '{{ ansible_user_id }}'
+      loop:
+        - org.gnome.nautilus.desktop.trash-icon-visible
+        - org.gnome.nautilus.desktop.volumes-visible
     tags:
       - gsettings
       - gsettings-interface
