@@ -86,4 +86,4 @@ gron_version: '0.5.2'
 
 # resty
 
-resty_version: 'v3.0'
+resty_version: 'master'
