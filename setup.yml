@@ -37,6 +37,9 @@
     - role: gron
       tags:
         - gron
+    - role: resty
+      tags:
+        - resty
     - role: nvm
       tags:
         - nvm
