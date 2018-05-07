@@ -1,18 +1,12 @@
 
-- name: Check if Resty is installed
-  command: command -v resty
-  register: resty_installed
-  ignore_errors: yes
-
-- name: Create ~/.local/src
+- name: Create ~/.resty
   file:
-    path: '{{ ansible_env.HOME }}/.local/src'
+    path: '{{ ansible_env.HOME }}/.resty'
     state: directory
     owner: '{{ ansible_user_id }}'
 
 - name: Download and install Resty
   get_url:
     url: '{{ resty_url }}'
-    dest: '{{ ansible_env.HOME }}/.local/src/resty'
+    dest: '{{ ansible_env.HOME }}/.resty/resty'
     owner: '{{ ansible_user_id }}'
-  when: resty_installed.rc != 0
