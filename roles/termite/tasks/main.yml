@@ -20,7 +20,7 @@
 
     - name: Copy Termite's config file
       copy:
-        src: '{{ termite_config_file }}.ini'
+        src: 'config/{{ termite_config_file }}.ini'
         dest: '{{ ansible_env.HOME }}/.config/termite/config'
         owner: '{{ ansible_user_id }}'
 
