@@ -47,6 +47,11 @@ nvm_version: 0.33.11
 tmux_version: '2.7'
 
 
+# termite
+
+termite_config_file: 'config.nord'
+
+
 # zsh
 
 zsh_version: '5.5'
