@@ -7,8 +7,11 @@
 
   - name: Install Adapta Theme
     apt:
-      name: adapta-gtk-theme
+      name: '{{ item }}'
       state: latest
+    loop:
+      - adapta-gtk-theme
+      - adapta-backgrounds
 
   - name: Set Adapta Theme as default
     gsettings:

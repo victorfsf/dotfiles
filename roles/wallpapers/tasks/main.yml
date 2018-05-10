@@ -34,7 +34,7 @@
     - name: Set screensaver
       gsettings:
         key: org.gnome.desktop.screensaver.picture-uri
-        value: "file://{{ wallpapers_dir }}/screensaver.png"
+        value: "file:///usr/share/backgrounds/adapta/tealized.jpg"
         state: present
         user: '{{ ansible_user_id }}'
 
