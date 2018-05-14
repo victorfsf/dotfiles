@@ -3,4 +3,3 @@
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
-    owner: '{{ ansible_user_id }}'
