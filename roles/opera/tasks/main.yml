@@ -1,0 +1,18 @@
+
+- block:
+  - name: Check if opera is installed
+    command: opera --version
+    register: opera_installed
+    ignore_errors: yes
+    tags:
+      - check
+      - check-opera
+
+  - name: Download and install opera
+    apt:
+      deb: '{{ opera_download_url }}'
+    when: opera_installed.rc != 0
+
+  tags:
+    - install
+    - install-opera

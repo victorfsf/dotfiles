@@ -1,13 +1,11 @@
 #!/bin/bash
 
 if ! command -v ansible-playbook >/dev/null; then
-    # Install ansible 2.5.2
-    codename=$(lsb_release -cs)
-    echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu $codename main" | \
-        sudo tee /etc/apt/sources.list.d/ansible.list
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    # Install ansible
+    sudo apt-get install software-properties-common
+    sudo apt-add-repository ppa:ansible/ansible -y
     sudo apt-get update
-    sudo apt-get install -y ansible=2.5.2-1ppa~$codename
+    sudo apt-get install -y ansible
 fi
 
 ssh_private="$HOME/.ssh/id_rsa"

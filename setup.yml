@@ -73,15 +73,9 @@
     - role: teamsql
       tags:
         - teamsql
-    - role: yandex
+    - role: opera
       tags:
-        - yandex
-    - role: brave
-      tags:
-        - brave
-    - role: chrome
-      tags:
-        - chrome
+        - opera
     - role: spotify
       tags:
         - spotify
