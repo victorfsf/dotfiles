@@ -25,5 +25,3 @@ Execute the `run.sh` file:
 # Arguments to the ansible-playbook command can be passed here.
 ./run.sh
 ```
-
-**PS:** the `zenv` role is from a private repository, *for now*.
