@@ -25,9 +25,6 @@
     - role: zsh
       tags:
         - zsh
-    - role: zenv
-      tags:
-        - zenv
     - role: fzf
       tags:
         - fzf
@@ -46,9 +43,6 @@
     - role: pyenv
       tags:
         - pyenv
-    - role: java
-      tags:
-        - java
     - role: tmux
       tags:
         - tmux
@@ -70,12 +64,6 @@
     - role: psql
       tags:
         - psql
-    - role: teamsql
-      tags:
-        - teamsql
-    - role: opera
-      tags:
-        - opera
     - role: spotify
       tags:
         - spotify
@@ -89,17 +77,14 @@
       tags:
         - transmission
     - role: gimp
-      tags:
-        - gimp
+     tags:
+       - gimp
     - role: libreoffice
-      tags:
-        - libreoffice
+     tags:
+       - libreoffice
     - role: wallpapers
       tags:
         - wallpapers
-    - role: nemo
-      tags:
-        - nemo
     - role: numix
       tags:
         - numix

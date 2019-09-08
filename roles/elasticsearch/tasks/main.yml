@@ -8,6 +8,11 @@
       - check
       - check-elasticsearch
 
+  - name: Install Java
+    apt:
+      name: default-jre
+      state: latest
+
   - name: Install ElasticSearch
     apt:
       deb: '{{ elasticsearch_url }}'

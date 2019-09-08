@@ -2,8 +2,7 @@
     'termite.desktop',
     'code.desktop',
     'google-chrome.desktop',
-    'yandex-browser-beta.desktop',
-    'nemo.desktop',
+    'org.gnome.Nautilus.desktop',
     'spotify.desktop',
     'gnome-control-center.desktop'
 ]

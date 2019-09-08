@@ -100,7 +100,3 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 source "$HOME/.dotfiles/dotfiles.sh"
-source "$HOME/.zenv/bin/z.zsh"
-Z_EDITOR="code"
-
-z import ag >/dev/null

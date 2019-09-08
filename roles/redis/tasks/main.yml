@@ -60,11 +60,6 @@
       dest: /etc/redis/redis.conf
       owner: redis
 
-  - name: Copy redis.service
-    copy:
-      src: redis.service
-      dest: /etc/systemd/system/redis.service
-
   tags:
     - files
     - files-redis

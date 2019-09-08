@@ -98,10 +98,10 @@ def main():
         _set_value(schemadir, user, key, value)
 
     module.exit_json(
-        user=user, 
-        changed=changed, 
-        key=key, 
-        value=value, 
+        user=user,
+        changed=changed,
+        key=key,
+        value=value,
         old_value=old_value
     )
 

@@ -12,7 +12,7 @@ full_name:
 
 # Dash-to-Dock
 
-dash_icon_size: 48
+dash_icon_size: 42
 
 
 # Gnome theme name
@@ -32,19 +32,19 @@ vscode_gist_id:
 
 # pyenv
 
-python3_version: 3.6.5
-python2_version: 2.7.15
-pyenv_globals: 3.6.5 2.7.15
+python3_version: 3.7.4
+python2_version: 2.7.16
+pyenv_globals: 3.7.4 2.7.16
 
 # nvm
 
-node_version: 8.11.1
-nvm_version: 0.33.11
+node_version: 8.11.4
+nvm_version: 0.34.0
 
 
 # tmux
 
-tmux_version: '2.7'
+tmux_version: '2.9'
 
 
 # termite
@@ -67,11 +67,6 @@ psql_postgres_pass:  # postgres' role password
 # redis
 
 redis_pass:
-
-
-# java
-
-oracle_java_version: 8
 
 
 # elasticsearch

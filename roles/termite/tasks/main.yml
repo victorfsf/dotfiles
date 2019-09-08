@@ -29,12 +29,6 @@
         path: /lib/terminfo/x
         state: directory
 
-    - name: Link xterm-termite to /lib/terminfo/x
-      file:
-        src: /usr/local/share/terminfo/x/xterm-termite
-        dest: /lib/terminfo/x/xterm-termite
-        state: link
-
     - name: Copy termite-tmux script
       copy:
         src: termite-tmux
@@ -55,16 +49,18 @@
   - import_tasks: install.yml
     when: termite_installed.rc != 0
 
+  - name: Link xterm-termite to /lib/terminfo/x
+    file:
+      src: /usr/local/share/terminfo/x/xterm-termite
+      dest: /lib/terminfo/x/xterm-termite
+      state: link
+
   - name: Link termite-tmux to gnome-terminal
     file:
       src: /usr/local/bin/termite-tmux
       dest: /usr/bin/gnome-terminal
       state: link
       remote_src: yes
-
-    tags:
-      - files
-      - files-termite
 
   tags:
     - install
