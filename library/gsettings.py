@@ -97,13 +97,13 @@ def main():
     if changed and not module.check_mode:
         _set_value(schemadir, user, key, value)
 
-    print(json.dumps({
-        'user': user,
-        'changed': changed,
-        'key': key,
-        'value': value,
-        'old_value': old_value,
-    }))
+    module.exit_json(
+        user=user, 
+        changed=changed, 
+        key=key, 
+        value=value, 
+        old_value=old_value
+    )
 
 
 main()
