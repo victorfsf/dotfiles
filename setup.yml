@@ -77,10 +77,10 @@
       tags:
         - transmission
     - role: gimp
-     tags:
+      tags:
        - gimp
     - role: libreoffice
-     tags:
+      tags:
        - libreoffice
     - role: wallpapers
       tags:
