@@ -44,7 +44,7 @@ nvm_version: 0.34.0
 
 # tmux
 
-tmux_version: '2.9'
+tmux_version: '3.0a'
 
 
 # termite
