@@ -1,0 +1,67 @@
+- block:
+    - name: Check if Flameshot is installed
+      command: flameshot config -h
+      register: flameshot_installed
+      ignore_errors: true
+
+    - name: Install Flameshot
+      apt:
+        name: flameshot
+        state: latest
+      when: flameshot_installed.rc != 0
+
+    # from: https://askubuntu.com/a/1116076/825144
+
+    - name: Remove default screenshot keybinding
+      gsettings:
+        key: org.gnome.settings-daemon.plugins.media-keys.screenshot
+        value: ''
+        state: present
+        user: '{{ ansible_user_id }}'
+      when: >
+        override_default_keybindings is defined
+        and override_default_keybindings == true
+
+    - name: Set new custom keybinding
+      gsettings:
+        key: org.gnome.settings-daemon.plugins.media-keys.custom-keybindings
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+        state: present
+        user: '{{ ansible_user_id }}'
+      when: >
+        override_default_keybindings is defined
+        and override_default_keybindings == true
+
+    - name: Set new custom keybinding name
+      gsettings:
+        key: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/.name
+        value: 'flameshot'
+        state: present
+        user: '{{ ansible_user_id }}'
+      when: >
+        override_default_keybindings is defined
+        and override_default_keybindings == true
+
+    - name: Set new command
+      gsettings:
+        key: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/.command
+        value: '/usr/bin/flameshot gui'
+        state: present
+        user: '{{ ansible_user_id }}'
+      when: >
+        override_default_keybindings is defined
+        and override_default_keybindings == true
+
+    - name: Set binding
+      gsettings:
+        key: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/.binding
+        value: 'Print'
+        state: present
+        user: '{{ ansible_user_id }}'
+      when: >
+        override_default_keybindings is defined
+        and override_default_keybindings == true
+
+  tags:
+    - install
+    - install-flameshot

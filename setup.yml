@@ -91,6 +91,9 @@
     - role: adapta
       tags:
         - adapta
+    - role: flameshot
+      tags:
+        - flameshot
     - role: finish
       tags:
         - finish
