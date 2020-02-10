@@ -87,3 +87,7 @@ gron_version: '0.5.2'
 # resty
 
 resty_version: 'master'
+
+# flameshot
+
+flameshot_override_default_keybindings: true
